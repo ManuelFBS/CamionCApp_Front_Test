@@ -20,26 +20,43 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
+
           <Route
-            path="/lock-unlock"
+            path="/"
             element={
               <ProtectedRoute>
-                <LockUnlockPage />
+                <ProtectedRoutes />
               </ProtectedRoute>
             }
-          />
-          <Route
-            path="/employees"
-            element={
-              <ProtectedRoute>
-                <EmployeesPage />
-              </ProtectedRoute>
-            }
-          />
+          >
+            <Route
+              path="/lock-unlock"
+              element={<LockUnlockPage />}
+            />
+            <Route
+              path="/employees"
+              element={<EmployeesPage />}
+            />
+          </Route>
         </Routes>
       </main>
     </BrowserRouter>
   );
 }
+
+const ProtectedRoutes = () => {
+  return (
+    <Routes>
+      <Route
+        path="/lock-unlock"
+        element={<LockUnlockPage />}
+      />
+      <Route
+        path="/employees"
+        element={<EmployeesPage />}
+      />
+    </Routes>
+  );
+};
 
 export default App;
