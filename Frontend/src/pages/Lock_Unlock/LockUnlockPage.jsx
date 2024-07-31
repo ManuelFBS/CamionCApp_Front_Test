@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { unlockUser } from '../../../api/admin';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import swal2 from 'sweetalert2';
 
 export function LockUnlockPage() {
   const { register, handleSubmit } = useForm();
@@ -14,6 +15,11 @@ export function LockUnlockPage() {
       const response = await unlockUser(data);
 
       if (response.status === 200) {
+        swal2.fire({
+          title: 'Desbloqueo exitoso...!',
+          text: `El usuario ${data.usuario} ha sido desbloqueado exitosamente...!!!`,
+          icon: 'success',
+        });
         navigate('/employees');
       }
     } catch (error) {
