@@ -2,11 +2,11 @@ import { Button, Input, Label } from '../../components/UI';
 import { useForm } from 'react-hook-form';
 import { loginRequest } from '../../../api/auth';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export function LoginPage() {
   const { register, handleSubmit } = useForm();
-  const [error, setError] = useState('');
+  const [errors, setErrors] = useState([]);
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
@@ -17,9 +17,19 @@ export function LoginPage() {
         navigate('/employees');
       }
     } catch (error) {
-      setError('Usuario o contraseña incorrectos...!');
+      setErrors([error.response.data.message]);
     }
   };
+
+  useEffect(() => {
+    if (errors.length > 0) {
+      const timer = setTimeout(() => {
+        setErrors([]);
+      }, 5000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [errors]);
 
   return (
     <div className="flex h-[calc(100vh-100px)] items-center justify-center">
@@ -42,7 +52,9 @@ export function LoginPage() {
             placeholder="*******"
             {...register('password')}
           />
-          {error && <p className="text-red-600">{error}</p>}
+          {errors && (
+            <p className="text-red-600">{errors}</p>
+          )}
 
           <Button
             type="submit"
