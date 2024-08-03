@@ -22,7 +22,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
 
           <Route
-            path="/"
+            path="/*"
             element={
               <ProtectedRoute>
                 <ProtectedRoutes />
@@ -30,11 +30,11 @@ function App() {
             }
           >
             <Route
-              path="/lock-unlock"
+              path="lock-unlock"
               element={<LockUnlockPage />}
             />
             <Route
-              path="/employees"
+              path="employees"
               element={<EmployeesPage />}
             />
           </Route>
