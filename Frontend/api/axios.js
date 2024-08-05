@@ -1,12 +1,12 @@
 import axios from 'axios';
 
 // const instance = axios.create({
-//   baseURL: 'http://localhost:7000/api',
+//   baseURL: `${import.meta.env.VITE_BACK_URL_LOC}/api`,
 //   withCredentials: true,
 // });
 
 const instance = axios.create({
-  baseURL: 'https://cammioncontrolapp.onrender.com/api',
+  baseURL: `${import.meta.env.VITE_BACK_URL_DEPLOYED}/api`,
   withCredentials: true,
 });
 
