@@ -1,14 +1,14 @@
 import axios from 'axios';
 
-// const instance = axios.create({
-//   baseURL: `${import.meta.env.VITE_BACK_URL_LOC}/api`,
-//   withCredentials: true,
-// });
-
 const instance = axios.create({
-  baseURL: `${import.meta.env.VITE_BACK_URL_DEPLOYED}/api`,
+  baseURL: 'http://localhost:7000/api',
   withCredentials: true,
 });
+
+// const instance = axios.create({
+//   baseURL: 'https://cammioncontrolapp.onrender.com/api',
+//   withCredentials: true,
+// });
 
 instance.interceptors.request.use(
   async (config) => {

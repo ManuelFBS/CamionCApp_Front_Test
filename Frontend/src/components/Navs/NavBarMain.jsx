@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { logoutRequest } from '../../../api/auth';
-import { Button } from '../UI';
+
 
 export function NavBarMain() {
   const navigate = useNavigate();
@@ -19,47 +19,46 @@ export function NavBarMain() {
   };
 
   return (
-    <nav className="bg-zinc-700 my-2 mr-4 ml-4 mb-0 flex justify-between py-3 px-8 rounded-lg">
-      <Link to={'/dashboard/admin'}>
-        <h1 className="text-2xl font-bold mr-96">
-          Dashboard Admin
-        </h1>
+    <nav className="bg-gray-800 py-3 px-8 rounded-lg flex justify-between items-center">
+      <Link to={'/dashboard/admin'} className="text-2xl font-bold text-white">       
+          Dashboard Admin        
       </Link>
-
+      <div className="flex space-x-4">
       <Link
         to={'/login'}
-        className="bg-indigo-500 ml-72 px-4 py-1 rounded-sm"
+        className=" text-white px-4 py-2 hover:text-red-600 transition-colors"
       >
         Login
       </Link>
 
       <Link
         to={'/employees'}
-        className="bg-indigo-500 ml-4 px-4 py-1 rounded-sm"
+        className="text-white px-4 py-2  hover:text-red-600 transition-colors"
       >
         Personal
       </Link>
 
       <Link
         to={'lock-unlock'}
-        className="bg-indigo-500 ml-4 px-4 py-1 rounded-sm"
+        className="text-white px-4 py-2 hover:text-red-600 transition-colors"
       >
-        Usuario
+        Registro
       </Link>
 
       <Link
-        to={'/'}
-        className="bg-indigo-500 px-4 py-1 rounded-sm"
+        to={'/home'}
+        className="text-white px-4 py-2 hover:text-red-600 transition-colors"
       >
-        CContApp
+        Servicios
       </Link>
 
       <button
         onClick={handleLogout}
-        className="bg-indigo-500 px-4 py-1 rounded-sm"
+        className="text-white px-4 py-2 hover:text-red-600 transition-colors"
       >
         Logout
       </button>
+      </div>
     </nav>
   );
 }

@@ -28,24 +28,25 @@ export function LockUnlockPage() {
   };
 
   return (
-    <div className="flex h-[calc(100vh-100px)] items-center justify-center">
-      <div className="bg-zinc-800 max-w-md w-full p-8 rounded-md">
+    <div className="flex h-screen items-center justify-center bg-gray-100">
+      <div className="bg-gray-800 max-w-md w-full p-8 rounded-md shadow-lg">
         <h2 className="text-2xl font-bold italic mb-6 text-blue-300">
           Desbloqueo de Usuario
         </h2>
 
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Label htmlFor="inputValue">Usuario</Label>
+        <form onSubmit={handleSubmit(onSubmit)} className='space-y-4'>
+          <Label htmlFor="inputValue" className='text-white'>Usuario</Label>
           <Input
             type="text"
             placeholder="Escriba su 'usuario'..."
+            className='w-full px-4 py-2 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
             {...register('usuario')}
           />
           {error && <p className="text-red-600">{error}</p>}
 
           <Button
             type="submit"
-            className="w-full mt-3 mb-4"
+            className="w-full mt-4 py-2 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700 transition-colors"
           >
             Aceptar
           </Button>

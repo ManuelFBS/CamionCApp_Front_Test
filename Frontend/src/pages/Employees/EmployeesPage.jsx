@@ -1,11 +1,12 @@
-import React from 'react';
+import { HomePage } from "../Home/HomePage";
 
 export function EmployeesPage() {
   return (
-    <div className="flex justify-center items-center h-screen">
-      <h1 className="text-center text-5xl italic text-green-600 font-bold">
-        Employees Page...
-      </h1>
+    <div className="flex justify-center items-center h-screen bg-gray-100 p-6">
+      
+      <div className="w-full max-w-4xlnpm run dev">
+      <HomePage />
+      </div>      
     </div>
   );
 }
