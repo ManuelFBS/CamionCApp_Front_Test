@@ -21,7 +21,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
 
-          <Route
+          {/* <Route
             path="/*"
             element={
               <ProtectedRoute>
@@ -37,7 +37,16 @@ function App() {
               path="employees"
               element={<EmployeesPage />}
             />
-          </Route>
+          </Route> */}
+
+          <Route
+            path="/lock-unlock"
+            element={<LockUnlockPage />}
+          />
+          <Route
+            path="/employees"
+            element={<EmployeesPage />}
+          />
         </Routes>
       </main>
     </BrowserRouter>
