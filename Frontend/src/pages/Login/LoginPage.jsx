@@ -14,7 +14,7 @@ export function LoginPage() {
       const response = await loginRequest(data);
 
       if (response.status === 200) {
-        console.log(document.cookie);
+        // console.log(document.cookie);
         navigate('/employees');
       }
     } catch (error) {

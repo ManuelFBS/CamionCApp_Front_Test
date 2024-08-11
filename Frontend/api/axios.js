@@ -10,22 +10,26 @@ const instance = axios.create({
   withCredentials: true,
 });
 
-instance.interceptors.request.use(
-  async (config) => {
-    const csrfToken = document.cookie
-      .split('; ')
-      .find((row) => row.startsWith('csrf-token'))
-      ?.split('=')[1];
+// ------------------------------------------------------------------------------------------------------- //
+// // // *****  Activar para la producción... ***** // // //
 
-    if (csrfToken) {
-      config.headers['csrf-token'] = csrfToken;
-    }
+// instance.interceptors.request.use(
+//   async (config) => {
+//     const csrfToken = document.cookie
+//       .split('; ')
+//       .find((row) => row.startsWith('csrf-token'))
+//       ?.split('=')[1];
 
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  },
-);
+//     if (csrfToken) {
+//       config.headers['csrf-token'] = csrfToken;
+//     }
+
+//     return config;
+//   },
+//   (error) => {
+//     return Promise.reject(error);
+//   },
+// );
+// ------------------------------------------------------------------------------------------------------- //
 
 export default instance;
