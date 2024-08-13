@@ -1,20 +1,28 @@
 import { Button, Input, Label } from '../../components/UI';
 import { useForm } from 'react-hook-form';
 import { loginRequest } from '../../../api/auth';
+import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { Loading } from '../../components/Loading/Loading';
+// import './LoginPage.css';
 
 export function LoginPage() {
   const { register, handleSubmit } = useForm();
   const [errors, setErrors] = useState([]);
   const navigate = useNavigate();
+  const { setIsAuthenticated } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = async (data) => {
     try {
+      setIsLoading(true); // Mostrar spinner de carga...
+
       const response = await loginRequest(data);
 
       if (response.status === 200) {
         // console.log(document.cookie);
+        setIsAuthenticated(true);
         navigate('/employees');
       }
     } catch (error) {
@@ -33,37 +41,56 @@ export function LoginPage() {
   }, [errors]);
 
   return (
-    <div className="flex h-[calc(100vh-100px)] items-center justify-center">
-      <div className="bg-zinc-800 max-w-md w-full p-8 rounded-md">
-        <h2 className="text-2xl font-bold italic mb-6 text-blue-300">
-          Login
-        </h2>
+    <div>
+      {isLoading && (
+        <div>
+          <Loading />
+        </div>
+      )}{' '}
+      {/* Se renderiza si es true... */}
+      <div className="flex h-[calc(100vh-100px)] items-center justify-center">
+        {/* {isLoading && (
+        <div>
+          <Loading />
+        </div>
+      )}{' '} */}
+        {/* Se renderiza si es true... */}
+        <div className="bg-zinc-100 border-4 border-red-600 max-w-md w-full p-0 rounded-md">
+          <div className="bg-red-600 flex items-stretch">
+            <h2 className="text-2xl font-bold italic ml-48 mb-2 text-gray-100">
+              Login
+            </h2>
+          </div>
 
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Label htmlFor="inputValue">Usuario</Label>
-          <Input
-            type="text"
-            placeholder="Escriba su 'usuario'..."
-            {...register('usuario')}
-          />
-
-          <Label htmlFor="password">Password</Label>
-          <Input
-            type="password"
-            placeholder="*******"
-            {...register('password')}
-          />
-          {errors && (
-            <p className="text-red-600">{errors}</p>
-          )}
-
-          <Button
-            type="submit"
-            className="w-full mt-3 mb-4"
+          <form
+            className="pt-5 pl-6 pr-6 pb-4"
+            onSubmit={handleSubmit(onSubmit)}
           >
-            Aceptar
-          </Button>
-        </form>
+            <Label htmlFor="inputValue">Usuario</Label>
+            <Input
+              type="text"
+              placeholder="Escriba su 'usuario'..."
+              {...register('usuario')}
+            />
+
+            <Label htmlFor="password">Password</Label>
+            <Input
+              type="password"
+              placeholder="*******"
+              {...register('password')}
+            />
+            {errors && (
+              <p className="text-red-600">{errors}</p>
+            )}
+
+            <Button
+              type="submit"
+              className="bg-slate-500 w-full mt-3 mb-4 hover:bg-slate-400"
+            >
+              Aceptar
+            </Button>
+          </form>
+        </div>
       </div>
     </div>
   );

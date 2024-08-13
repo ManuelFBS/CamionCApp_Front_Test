@@ -1,6 +1,9 @@
 export { HomePage } from './Home/HomePage';
 export { LoginPage } from './Login/LoginPage';
 export { EmployeesPage } from './Employees/EmployeesPage';
+export { EmployeesFormAddPage } from './Employees/EmployeesFormAddPage';
+export { EmployeesAllPage } from './Employees/EmployeesAllPage';
+export { EmployeeByDniPage } from './Employees/EmployeesByDniPage';
 export { LockUnlockPage } from './Lock_Unlock/LockUnlockPage';
 // export { RegisterPage } from './Register/RegisterPage';
 // export { DashboardPage } from './Dashboard/DashboardPage';

@@ -1,10 +1,10 @@
 import React from 'react';
 
-export function HomePage() {
+export function EmployeeByDniPage() {
   return (
     <div className="flex justify-center items-center h-screen">
       <h1 className="text-center text-5xl italic text-red-600 font-bold">
-        Home Page...
+        Buscar Empleado por Cédula...
       </h1>
     </div>
   );
