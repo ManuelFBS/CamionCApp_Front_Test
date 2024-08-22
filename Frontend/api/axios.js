@@ -1,14 +1,15 @@
 import axios from 'axios';
 
-// const instance = axios.create({
-//   baseURL: `${import.meta.env.VITE_BACK_URL_LOC}/api`,
-//   withCredentials: true,
-// });
-
 const instance = axios.create({
-  baseURL: `${import.meta.env.VITE_BACK_URL_DEPLOYED}/api`,
+  baseURL: `${import.meta.env.VITE_BACK_URL_LOC}/api`,
+  // baseURL: '/api',
   withCredentials: true,
 });
+
+// const instance = axios.create({
+//   baseURL: `${import.meta.env.VITE_BACK_URL_DEPLOYED}/api`,
+//   withCredentials: true,
+// });
 
 // ------------------------------------------------------------------------------------------------------- //
 // // // *****  Activar para la producción... ***** // // //

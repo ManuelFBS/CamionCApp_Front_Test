@@ -46,14 +46,14 @@ export const UserDropdown = () => {
           {isAuthenticated ? (
             <>
               <Link
-                // to={'employees/add'}
+                to={'/users/add'}
                 onClick={() => setIsOpen(false)}
                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
               >
                 Nuevo Usuario...
               </Link>
               <Link
-                // to={'/employees/all'}
+                to={'/users'}
                 onClick={() => setIsOpen(false)}
                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
               >
@@ -81,7 +81,7 @@ export const UserDropdown = () => {
                 Bloquear Usuario...
               </Link>
               <Link
-                // to={'/employees/search'}
+                to={'/users/admin/lock-unlock'}
                 onClick={() => setIsOpen(false)}
                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
               >

@@ -5,13 +5,16 @@ import {
 } from 'react-router-dom';
 import {
   EmployeesPage,
-  EmployeesAllPage,
   EmployeesFormAddPage,
   EmployeeByDniPage,
+  UpdateEmployeeByDni,
   HomePage,
-  LockUnlockPage,
   LoginPage,
+  UsersFormAddPage,
+  UsersFormLockUnlockPage,
+  UsersPage,
 } from './pages';
+import { EmployeesDetailsCard } from './components/Employees/EmployeesDetailsCard';
 import { NavBarMain } from './components/Navs/NavBarMain';
 import { AuthProvider } from './context/AuthContext';
 import { ProtectedRoute } from './pages/ProtectedRoutes/ProtectedRoutes';
@@ -35,24 +38,38 @@ function App() {
               }
             >
               <Route
-                path="lock-unlock"
-                element={<LockUnlockPage />}
-              />
-              <Route
                 path="employees"
                 element={<EmployeesPage />}
+              />
+              <Route
+                path="employees/employee/:_id"
+                element={<EmployeesDetailsCard />}
               />
               <Route
                 path="employees/add"
                 element={<EmployeesFormAddPage />}
               />
               <Route
-                path="employees/all"
-                element={<EmployeesAllPage />}
+                path="employees/bydni"
+                element={<EmployeeByDniPage />}
               />
               <Route
-                path="employees/search"
-                element={<EmployeeByDniPage />}
+                path="employees/bydni/:cedula"
+                element={<EmployeesDetailsCard />}
+              />
+              <Route
+                path="employees/employee/edit"
+                element={<UpdateEmployeeByDni />}
+              />
+              <Route path="users" element={<UsersPage />} />
+              <Route
+                path="users/add"
+                element={<UsersFormAddPage />}
+              />
+
+              <Route
+                path="users/admin/lock-unlock"
+                element={<UsersFormLockUnlockPage />}
               />
             </Route>
           </Routes>
@@ -66,24 +83,37 @@ const ProtectedRoutes = () => {
   return (
     <Routes>
       <Route
-        path="/lock-unlock"
-        element={<LockUnlockPage />}
-      />
-      <Route
         path="/employees"
         element={<EmployeesPage />}
+      />
+      <Route
+        path="/employees/employee/:id"
+        element={<EmployeesDetailsCard />}
       />
       <Route
         path="/employees/add"
         element={<EmployeesFormAddPage />}
       />
       <Route
-        path="/employees/all"
-        element={<EmployeesAllPage />}
+        path="/employees/bydni"
+        element={<EmployeeByDniPage />}
       />
       <Route
-        path="/employees/search"
-        element={<EmployeeByDniPage />}
+        path="/employees/bydni/:cedula"
+        element={<EmployeesDetailsCard />}
+      />
+      <Route
+        path="/employees/employee/edit"
+        element={<UpdateEmployeeByDni />}
+      />
+      <Route path="/users" element={<UsersPage />} />
+      <Route
+        path="/users/add"
+        element={<UsersFormAddPage />}
+      />
+      <Route
+        path="/users/admin/lock-unlock"
+        element={<UsersFormLockUnlockPage />}
       />
     </Routes>
   );

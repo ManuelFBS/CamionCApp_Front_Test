@@ -53,18 +53,25 @@ export const EmployeeDropdown = () => {
                 Agregar nuevo...
               </Link>
               <Link
-                to={'/employees/all'}
+                to={'/employees'}
                 onClick={() => setIsOpen(false)}
                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
               >
                 Mostrar todos...
               </Link>
               <Link
-                to={'/employees/search'}
+                to={'/employees/bydni'}
                 onClick={() => setIsOpen(false)}
                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
               >
                 Buscar por cédula...
+              </Link>
+              <Link
+                to={'/employees/employee/edit'}
+                onClick={() => setIsOpen(false)}
+                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+              >
+                Actualizar Empleado...
               </Link>
             </>
           ) : (

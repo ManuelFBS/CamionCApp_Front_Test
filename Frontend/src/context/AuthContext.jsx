@@ -19,23 +19,12 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const checkAuth = async () => {
-      // if (isAuthenticated) return;
       try {
         const response = await loginCheck();
 
         setIsAuthenticated(response.data.isAuthenticated);
       } catch (error) {
-        if (
-          error.response &&
-          error.response.status === 401
-        ) {
-          setIsAuthenticated(false);
-        } else {
-          console.error(
-            'Error al verificar la autenticación: ',
-            error,
-          );
-        }
+        setIsAuthenticated(false);
       } finally {
         setLoading(false);
       }

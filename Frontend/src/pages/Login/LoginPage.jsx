@@ -5,7 +5,6 @@ import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Loading } from '../../components/Loading/Loading';
-// import './LoginPage.css';
 
 export function LoginPage() {
   const { register, handleSubmit } = useForm();
@@ -18,15 +17,20 @@ export function LoginPage() {
     try {
       setIsLoading(true); // Mostrar spinner de carga...
 
+      console.log(data);
+
       const response = await loginRequest(data);
 
+      console.log(response.data);
+
       if (response.status === 200) {
-        // console.log(document.cookie);
         setIsAuthenticated(true);
         navigate('/employees');
       }
     } catch (error) {
-      setErrors([error.response.data.message]);
+      setErrors([error.response?.data?.message]);
+    } finally {
+      setIsLoading(false); // Se oculta el spinner de carga...
     }
   };
 
@@ -49,12 +53,6 @@ export function LoginPage() {
       )}{' '}
       {/* Se renderiza si es true... */}
       <div className="flex h-[calc(100vh-100px)] items-center justify-center">
-        {/* {isLoading && (
-        <div>
-          <Loading />
-        </div>
-      )}{' '} */}
-        {/* Se renderiza si es true... */}
         <div className="bg-zinc-100 border-4 border-red-600 max-w-md w-full p-0 rounded-md">
           <div className="bg-red-600 flex items-stretch">
             <h2 className="text-2xl font-bold italic ml-48 mb-2 text-gray-100">
@@ -79,8 +77,10 @@ export function LoginPage() {
               placeholder="*******"
               {...register('password')}
             />
-            {errors && (
-              <p className="text-red-600">{errors}</p>
+            {errors.length > 0 && (
+              <p className="text-red-600">
+                {errors.join(', ')}
+              </p>
             )}
 
             <Button

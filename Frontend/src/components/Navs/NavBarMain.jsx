@@ -14,8 +14,7 @@ export function NavBarMain() {
       const response = await logoutRequest();
       if (response.status === 200) {
         logout();
-        navigate('/login');
-        // window.location.reload();
+        navigate('/');
       } else {
         console.error('Error al cerrar sesión');
       }
@@ -41,19 +40,7 @@ export function NavBarMain() {
         >
           Login
         </Link>
-        {/* <Link
-          to={'/employees'}
-          className="pt-1 hover:text-yellow-200"
-        >
-          Personal
-        </Link> */}
         <EmployeeDropdown />
-        {/* <Link
-          to={'lock-unlock'}
-          className="pt-1 hover:text-yellow-200"
-        >
-          Usuario
-        </Link> */}
         <UserDropdown />
         <Link
           to={'/'}
