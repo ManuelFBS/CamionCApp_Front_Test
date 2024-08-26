@@ -10,7 +10,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="flex justify-center items-center p-4 bg-red-500">
+    <footer className="flex justify-center items-center p-4 bg-red-600">
       <button
         className="text-xl p-2 rounded hover:bg-gray-600"
         onClick={handleBackClick}

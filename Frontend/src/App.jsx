@@ -14,7 +14,12 @@ import { ProtectedRoute } from './pages/ProtectedRoutes/ProtectedRoutes';
 import Layout from './components/Layout';
 import LandingPage from './LandingPage';
 import FormTractomulas from './pages/FormTractomulas';
-import Tractomulas from './components/Tractomulas';
+import FormVolquetas from './pages/FormVolquetas';
+import FormTanqueos from './pages/FormTanqueos';
+import UserProfileDetail from './pages/UserProfileDetail';
+import Tractomulaspdf from './components/Tractomulaspdf';
+import Tanqueospdf from './components/Tanqueospdf';
+import Volquetaspdf from './components/Volquetaspdf';
 
 function App() {
   return (
@@ -26,8 +31,13 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path='/formtractomulas' element={<FormTractomulas />} />
-          <Route path='/tractomulas' element={<Tractomulas />} />
+          <Route path='/formTractomulas' element={<FormTractomulas />} />
+          <Route path='/formVolquetas' element={<FormVolquetas />} />
+          <Route path='/formTanqueos' element={<FormTanqueos />} />
+          <Route path='/tractomulaspdf' element={<Tractomulaspdf />} />
+          <Route path='/tanqueospdf' element={<Tanqueospdf />} />
+          <Route path='/volquetaspdf' element={<Volquetaspdf />} />
+          <Route path='/userProfileDetail' element={<UserProfileDetail />} />
 
           <Route
             path="/*"
