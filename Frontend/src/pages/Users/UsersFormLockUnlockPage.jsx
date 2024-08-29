@@ -28,7 +28,7 @@ export function UsersFormLockUnlockPage() {
   };
 
   return (
-    <div className="flex h-[calc(100vh-100px)] items-center justify-center">
+    <div className="flex h-[calc(100vh-100px)] items-center justify-center mt-0 bg-otherpages min-h-screen">
       <div className="bg-zinc-100 border-4 border-red-600 max-w-md w-full p-0 rounded-md">
         <div className="bg-red-600 flex items-stretch">
           <h2 className="text-2xl font-bold italic ml-24 mb-2 text-gray-100">

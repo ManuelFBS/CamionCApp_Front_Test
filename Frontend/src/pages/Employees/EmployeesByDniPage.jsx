@@ -38,7 +38,7 @@ export function EmployeeByDniPage() {
   };
 
   return (
-    <div>
+    <div className="bg-otherpages min-h-screen">
       {loading && (
         <div>
           <Loading />

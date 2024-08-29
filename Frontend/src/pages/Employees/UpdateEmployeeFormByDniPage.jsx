@@ -113,7 +113,7 @@ export function UpdateEmployeeByDni() {
   };
 
   return (
-    <div>
+    <div className="bg-otherpages min-h-screen">
       {isLoading && (
         <div>
           <Loading />

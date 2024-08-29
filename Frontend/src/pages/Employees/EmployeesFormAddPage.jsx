@@ -59,7 +59,7 @@ export function EmployeesFormAddPage() {
   };
 
   return (
-    <div>
+    <div className="bg-otherpages min-h-screen">
       {isLoading && (
         <div>
           <Loading />
