@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Link, useNavigate } from 'react-router-dom';
 import { logoutRequest } from '../../../api/auth';
 import { EmployeeDropdown } from '../Menu/EmployeeDropdown';

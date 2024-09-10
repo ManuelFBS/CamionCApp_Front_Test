@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Button, Input, Label } from '../../components/UI';
 import { useForm } from 'react-hook-form';
 import { loginRequest } from '../../../api/auth';
@@ -10,7 +11,7 @@ export function LoginPage() {
     const { register, handleSubmit } = useForm();
     const [errors, setErrors] = useState([]);
     const navigate = useNavigate();
-    const { setIsAuthenticated } = useAuth();
+    const { setIsAuthenticated, userRole } = useAuth();
     const [isLoading, setIsLoading] = useState(false);
 
     const onSubmit = async (data) => {
@@ -22,10 +23,25 @@ export function LoginPage() {
             const response = await loginRequest(data);
 
             console.log(response.data);
+            // console.log('Status de la petición: ', response.status);
+            // console.log(response.data.usuarioReg.roles);
 
             if (response.status === 200) {
+                const role = response.data.usuarioReg.roles;
+
+                // console.log(response.data.user.roles);
+
                 setIsAuthenticated(true);
-                navigate('/employees');
+
+                // Redirigir según el rol del usuario...
+                if (role === 'Owner' || role === 'Admin') {
+                    navigate('/employees');
+                } else if (role === 'Empleado') {
+                    navigate('/volquetas/planilla/add');
+                } else {
+                    navigate('/unauthorized');
+                }
+                // navigate('/employees');
             }
         } catch (error) {
             setErrors([error.response?.data?.message]);
