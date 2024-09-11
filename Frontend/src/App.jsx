@@ -31,19 +31,15 @@ function App() {
                         <Route
                             path="/employees"
                             element={
-                                <ProtectedRoute
-                                    allowedRoles={['Admin', 'Owner']}
-                                >
+                                <ProtectedRoute allowed={['Admin', 'Owner']}>
                                     <EmployeesPage />
                                 </ProtectedRoute>
                             }
                         />
                         <Route
-                            path="/employees/employee/:id"
+                            path="/employees/employee/:_id"
                             element={
-                                <ProtectedRoute
-                                    allowedRoles={['Admin', 'Owner']}
-                                >
+                                <ProtectedRoute allowed={['Admin', 'Owner']}>
                                     <EmployeesDetailsCard />
                                 </ProtectedRoute>
                             }
@@ -51,9 +47,7 @@ function App() {
                         <Route
                             path="/employees/add"
                             element={
-                                <ProtectedRoute
-                                    allowedRoles={['Admin', 'Owner']}
-                                >
+                                <ProtectedRoute allowed={['Admin', 'Owner']}>
                                     <EmployeesFormAddPage />
                                 </ProtectedRoute>
                             }
@@ -61,9 +55,7 @@ function App() {
                         <Route
                             path="/employees/bydni"
                             element={
-                                <ProtectedRoute
-                                    allowedRoles={['Admin', 'Owner']}
-                                >
+                                <ProtectedRoute allowed={['Admin', 'Owner']}>
                                     <EmployeeByDniPage />
                                 </ProtectedRoute>
                             }
@@ -71,9 +63,7 @@ function App() {
                         <Route
                             path="/employees/bydni/:cedula"
                             element={
-                                <ProtectedRoute
-                                    allowedRoles={['Admin', 'Owner']}
-                                >
+                                <ProtectedRoute allowed={['Admin', 'Owner']}>
                                     <EmployeesDetailsCard />
                                 </ProtectedRoute>
                             }
@@ -81,9 +71,7 @@ function App() {
                         <Route
                             path="/employees/employee/edit"
                             element={
-                                <ProtectedRoute
-                                    allowedRoles={['Admin', 'Owner']}
-                                >
+                                <ProtectedRoute allowed={['Admin', 'Owner']}>
                                     <UpdateEmployeeByDni />
                                 </ProtectedRoute>
                             }
@@ -91,9 +79,7 @@ function App() {
                         <Route
                             path="/users"
                             element={
-                                <ProtectedRoute
-                                    allowedRoles={['Admin', 'Owner']}
-                                >
+                                <ProtectedRoute allowed={['Admin', 'Owner']}>
                                     <UsersPage />
                                 </ProtectedRoute>
                             }
@@ -101,9 +87,7 @@ function App() {
                         <Route
                             path="/users/add"
                             element={
-                                <ProtectedRoute
-                                    allowedRoles={['Admin', 'Owner']}
-                                >
+                                <ProtectedRoute allowed={['Admin', 'Owner']}>
                                     <UsersFormAddPage />
                                 </ProtectedRoute>
                             }
@@ -111,9 +95,7 @@ function App() {
                         <Route
                             path="/users/admin/lock-unlock"
                             element={
-                                <ProtectedRoute
-                                    allowedRoles={['Admin', 'Owner']}
-                                >
+                                <ProtectedRoute allowed={['Admin', 'Owner']}>
                                     <UsersFormLockUnlockPage />
                                 </ProtectedRoute>
                             }
@@ -122,11 +104,7 @@ function App() {
                             path="/volquetas/planilla/add"
                             element={
                                 <ProtectedRoute
-                                    allowedRoles={[
-                                        'Admin',
-                                        'Owner',
-                                        'Empleado',
-                                    ]}
+                                    allowed={['Admin', 'Owner', 'Empleado']}
                                 >
                                     <VolquetasFormPage />
                                 </ProtectedRoute>

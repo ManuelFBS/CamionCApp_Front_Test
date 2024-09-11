@@ -1,3 +1,5 @@
+/* eslint-disable no-empty */
+/* eslint-disable no-unused-vars */
 import { useEffect, useState } from 'react';
 import { showAllEmployeesRequest } from '../../../api/employees';
 import { useNavigate } from 'react-router-dom';
@@ -5,22 +7,48 @@ import { useNavigate } from 'react-router-dom';
 export function EmployeesList() {
     const [employees, setEmployees] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
         const searchEmployees = async () => {
             try {
                 const response = await showAllEmployeesRequest();
+
                 setEmployees(response.data);
             } catch (error) {
-                console.error('Error fetching employees:', error);
+                // console.error('Error fetching employees:', error);
+                if (error.response) {
+                    const statusCode = error.response.status;
+
+                    console.error('Código de error de status: ', statusCode);
+                    //
+                    switch (statusCode) {
+                        case 401:
+                            navigate('/unauthorized');
+                            break;
+                        case 404:
+                            setError('No se encontraron empleados...!');
+                            break;
+                        case 500:
+                            setError(
+                                'Error en el servidor. Por favor, inténtalo más tarde...!',
+                            );
+                            break;
+                        default:
+                            setError(
+                                'Error desconocido. Favor contactar con el desarrollador de la app...!',
+                            );
+                            break;
+                    }
+                }
             } finally {
                 setLoading(false);
             }
         };
 
         searchEmployees();
-    }, []);
+    }, [navigate]);
 
     const formatDate = (dateString) => {
         const date = new Date(dateString);
@@ -35,6 +63,10 @@ export function EmployeesList() {
 
     if (loading) {
         return <p>Loading...</p>;
+    }
+
+    if (error) {
+        return <p>{error}</p>;
     }
 
     return (

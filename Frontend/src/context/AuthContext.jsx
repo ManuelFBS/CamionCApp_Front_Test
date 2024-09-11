@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }) => {
 
                 setUserRole(response.data.user?.roles); // Se guardar el rol...
 
-                console.log(userRole);
+                console.log(response.data.user?.roles);
             } catch (error) {
                 setIsAuthenticated(false);
                 setUserRole(null);
@@ -53,6 +53,7 @@ export const AuthProvider = ({ children }) => {
                 isAuthenticated,
                 loading,
                 userRole, // Exponemos el rol
+                setUserRole,
                 logout,
                 setIsAuthenticated,
             }}
