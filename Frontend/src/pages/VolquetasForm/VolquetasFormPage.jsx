@@ -22,6 +22,9 @@ export function VolquetasFormPage() {
         try {
             setIsLoading(true);
 
+            data.hora_inicio = new Date(data.hora_inicio);
+            data.hora_final = new Date(data.hora_final);
+
             if (data.observacion === undefined) {
                 data.observacion = 'S/O';
             }
@@ -41,7 +44,7 @@ export function VolquetasFormPage() {
         } catch (error) {
             swal2.fire({
                 title: 'Error inesperado...!',
-                text: `Ha ocurrido un error inesperado: ${error.message}. Si el error persiste, contacte con el Deassarrollador del software...!!!`,
+                text: `Ha ocurrido un error inesperado: ${error.message}. Si el error persiste, contacte con el Desarrollador del software...!!!`,
                 icon: 'error',
             });
         }
@@ -217,7 +220,7 @@ export function VolquetasFormPage() {
                             <div>
                                 <Label htmlFor="hora_inicio">Hora Inicio</Label>
                                 <Input
-                                    type="text"
+                                    type="datetime-local"
                                     placeholder="Coloque hora de inicio..."
                                     {...register('hora_inicio', {
                                         required: 'Este campo es obligatorio',
@@ -233,7 +236,7 @@ export function VolquetasFormPage() {
                             <div>
                                 <Label htmlFor="hora_final">Hora Final</Label>
                                 <Input
-                                    type="text"
+                                    type="datetime-local"
                                     placeholder="Coloque hora de fin..."
                                     {...register('hora_final', {
                                         required: 'Este campo es obligatorio',
