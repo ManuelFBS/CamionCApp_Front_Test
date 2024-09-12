@@ -1,3 +1,4 @@
+/* eslint-disable no-empty */
 /* eslint-disable no-unused-vars */
 import { Button, Input, Label } from '../../components/UI';
 import { useForm } from 'react-hook-form';
@@ -17,24 +18,35 @@ export function VolquetasFormPage() {
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
 
-    const onSubmit = async (data) => {};
-    /*
-    "n_planilla": "A10CT08", ---------
-  "fecha": "2024-09-05", -----------
-  "placa_vehiculo": "T10025", ----------
-  "cedula": 2000215520, -----------
-  "cliente": "Constructora 2100", -----------
-  "volmts3": "10m3", -----------
-  "n_viajes": 1, ------------
-  "material": "Gravilla", ------------
-  "hora_inicio": "2024-09-05T07:30:00",
-  "hora_final": "2024-09-05T11:50:00",
-  "km_inicial": 2750,
-  "km_final": 2820,
-  "lugar_de_cargue": "Sitio 01",
-  "lugar_de_descargue": "Sitio 02",
-  "observacion": "Operación normal"
-    */
+    const onSubmit = async (data) => {
+        try {
+            setIsLoading(true);
+
+            if (data.observacion === undefined) {
+                data.observacion = 'S/O';
+            }
+
+            const response = await createNewVolquetaForm(data);
+
+            if (response.status === 201) {
+                swal2.fire({
+                    title: 'Registro exitoso...!',
+                    text: `La planilla Nº ${data.n_planilla} ha sido registrada exitosamente...!!!`,
+                    icon: 'success',
+                    confirmButtonText: 'Aceptar',
+                });
+
+                reset();
+            }
+        } catch (error) {
+            swal2.fire({
+                title: 'Error inesperado...!',
+                text: `Ha ocurrido un error inesperado: ${error.message}. Si el error persiste, contacte con el Deassarrollador del software...!!!`,
+                icon: 'error',
+            });
+        }
+    };
+
     return (
         <div className="bg-otherpages min-h-screen">
             {isLoading && (
@@ -43,10 +55,10 @@ export function VolquetasFormPage() {
                 </div>
             )}{' '}
             {/* Se renderiza si es true... */}
-            <div className="flex h-[calc(100vh-100px)] items-center justify-center">
+            <div className="flex h-[calc(100vh-100px)] items-center justify-center mt-24">
                 <div className="bg-zinc-100 border-4 border-red-600 max-w-md w-full p-0 rounded-md">
                     <div className="bg-red-600 flex items-stretch">
-                        <h2 className="text-2xl font-bold italic ml-24 mb-2 text-gray-100">
+                        <h2 className="text-2xl font-bold italic ml-32 mb-2 text-gray-100">
                             Nueva Planilla
                         </h2>
                     </div>
@@ -55,6 +67,7 @@ export function VolquetasFormPage() {
                         onSubmit={handleSubmit(onSubmit)}
                         className="pt-5 pl-6 pr-6 pb-4"
                     >
+                        {/* Nro de planilla --- Fecha */}
                         <div className="grid grid-cols-2 gap-3">
                             <div>
                                 <Label htmlFor="n_planilla">Nº Planilla</Label>
@@ -73,9 +86,7 @@ export function VolquetasFormPage() {
                             </div>
 
                             <div>
-                                <Label htmlFor="fecha">
-                                    Fecha de nacimiento
-                                </Label>
+                                <Label htmlFor="fecha">Fecha</Label>
                                 <Input
                                     type="date"
                                     {...register('fecha', {
@@ -90,6 +101,7 @@ export function VolquetasFormPage() {
                             </div>
                         </div>
 
+                        {/* Placa --- Cédula */}
                         <div className="grid grid-cols-2 gap-3">
                             <div>
                                 <Label htmlFor="placa_vehiculo">Placa</Label>
@@ -126,12 +138,13 @@ export function VolquetasFormPage() {
                             </div>
                         </div>
 
+                        {/* Cliente --- Volumen de carga */}
                         <div className="grid grid-cols-2 gap-3">
                             <div>
                                 <Label htmlFor="cliente">Cliente</Label>
                                 <Input
                                     type="text"
-                                    placeholder="Escriba el nombredel cliente..."
+                                    placeholder="Escriba nombre del cliente..."
                                     {...register('cliente', {
                                         required: 'Este campo es obligatorio',
                                     })}
@@ -144,7 +157,9 @@ export function VolquetasFormPage() {
                             </div>
 
                             <div>
-                                <Label htmlFor="volmts3">Volumen Carga</Label>
+                                <Label htmlFor="volmts3">
+                                    Volumen de Carga
+                                </Label>
                                 <Input
                                     type="text"
                                     placeholder="Escriba el volumen de carga..."
@@ -160,6 +175,7 @@ export function VolquetasFormPage() {
                             </div>
                         </div>
 
+                        {/* Nro de viajes --- Material */}
                         <div className="grid grid-cols-2 gap-3">
                             <div>
                                 <Label htmlFor="n_viajes">
@@ -194,6 +210,142 @@ export function VolquetasFormPage() {
                                     </p>
                                 )}
                             </div>
+                        </div>
+
+                        {/* Hora Inicio --- Hora Final */}
+                        <div className="grid grid-cols-2 gap-3">
+                            <div>
+                                <Label htmlFor="hora_inicio">Hora Inicio</Label>
+                                <Input
+                                    type="text"
+                                    placeholder="Coloque hora de inicio..."
+                                    {...register('hora_inicio', {
+                                        required: 'Este campo es obligatorio',
+                                    })}
+                                />
+                                {errors.hora_inicio && (
+                                    <p className="text-red-700">
+                                        {errors.hora_inicio.message}
+                                    </p>
+                                )}
+                            </div>
+
+                            <div>
+                                <Label htmlFor="hora_final">Hora Final</Label>
+                                <Input
+                                    type="text"
+                                    placeholder="Coloque hora de fin..."
+                                    {...register('hora_final', {
+                                        required: 'Este campo es obligatorio',
+                                    })}
+                                />
+                                {errors.hora_final && (
+                                    <p className="text-red-700">
+                                        {errors.hora_final.message}
+                                    </p>
+                                )}
+                            </div>
+                        </div>
+
+                        {/* Kilometraje Inicio --- Kilometraje Final */}
+                        <div className="grid grid-cols-2 gap-3">
+                            <div>
+                                <Label htmlFor="km_inicial">Klm Inicial</Label>
+                                <Input
+                                    type="number"
+                                    placeholder="Coloque klm de inicial..."
+                                    {...register('km_inicial', {
+                                        required: 'Este campo es obligatorio',
+                                    })}
+                                />
+                                {errors.km_inicial && (
+                                    <p className="text-red-700">
+                                        {errors.km_inicial.message}
+                                    </p>
+                                )}
+                            </div>
+
+                            <div>
+                                <Label htmlFor="km_final">Klm Final</Label>
+                                <Input
+                                    type="number"
+                                    placeholder="Coloque klm de final..."
+                                    {...register('km_final', {
+                                        required: 'Este campo es obligatorio',
+                                    })}
+                                />
+                                {errors.km_final && (
+                                    <p className="text-red-700">
+                                        {errors.km_final.message}
+                                    </p>
+                                )}
+                            </div>
+                        </div>
+
+                        {/* Lugar de carga --- Lugar de descarga */}
+                        <div className="grid grid-cols-2 gap-3">
+                            <div>
+                                <Label htmlFor="lugar_de_cargue">
+                                    Lugar de Carga
+                                </Label>
+                                <Input
+                                    type="text"
+                                    placeholder="Escriba lugar de carga..."
+                                    {...register('lugar_de_cargue', {
+                                        required: 'Este campo es obligatorio',
+                                    })}
+                                />
+                                {errors.lugar_de_cargue && (
+                                    <p className="text-red-700">
+                                        {errors.lugar_de_cargue.message}
+                                    </p>
+                                )}
+                            </div>
+
+                            <div>
+                                <Label htmlFor="lugar_de_descargue">
+                                    Lugar de Descarga
+                                </Label>
+                                <Input
+                                    type="text"
+                                    placeholder="Escriba lugar descarga..."
+                                    {...register('lugar_de_descargue', {
+                                        required: 'Este campo es obligatorio',
+                                    })}
+                                />
+                                {errors.lugar_de_descargue && (
+                                    <p className="text-red-700">
+                                        {errors.lugar_de_descargue.message}
+                                    </p>
+                                )}
+                            </div>
+                        </div>
+
+                        {/* Observaciones */}
+                        <div className="grid grid-cols-1 gap-3">
+                            <Label htmlFor="observacion">Observación</Label>
+                            <textarea
+                                rows="3"
+                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                placeholder="Escriba sus observaciones..."
+                                {...register('observacion', {
+                                    required: 'Este campo es obligatorio',
+                                })}
+                            />
+                            {errors.observacion && (
+                                <p className="text-red-700">
+                                    {errors.observacion.message}
+                                </p>
+                            )}
+                        </div>
+
+                        <div className="flex justify-end">
+                            <Button
+                                type="submit"
+                                className="bg-slate-500 w-1/3 mt-3 mb-4 hover:bg-slate-400"
+                            >
+                                Aceptar
+                            </Button>
                         </div>
                     </form>
                 </div>
