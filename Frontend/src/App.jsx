@@ -10,6 +10,7 @@ import {
     UsersFormAddPage,
     UsersFormLockUnlockPage,
     UsersPage,
+    VolquetasPage,
     VolquetasFormPage,
     UnauthorizedPage,
 } from './pages';
@@ -100,6 +101,7 @@ function App() {
                                 </ProtectedRoute>
                             }
                         />
+                        <Route path="/volquetas" element={<VolquetasPage />} />
                         <Route
                             path="/volquetas/planilla/add"
                             element={

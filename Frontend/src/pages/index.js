@@ -7,5 +7,6 @@ export { UpdateEmployeeByDni } from './Employees/UpdateEmployeeFormByDniPage';
 export { UsersFormAddPage } from './Users/UsersFormAddPage';
 export { UsersFormLockUnlockPage } from './Users/UsersFormLockUnlockPage';
 export { UsersPage } from './Users/UsersPage';
+export { VolquetasPage } from './VolquetasForm/VolquetasPage';
 export { VolquetasFormPage } from './VolquetasForm/VolquetasFormPage';
 export { UnauthorizedPage } from './UnauthorizedPage/UnauthorizedPage';

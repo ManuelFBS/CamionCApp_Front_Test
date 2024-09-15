@@ -3,10 +3,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { logoutRequest } from '../../../api/auth';
 import { EmployeeDropdown } from '../Menu/EmployeeDropdown';
 import { UserDropdown } from '../Menu/UserDropdown';
+import { EmployeeFormDropdown } from '../Menu/EmployeesFormDropdown';
 import { useAuth } from '../../context/AuthContext';
 
 export function NavBarMain() {
-    const { logout, setIsAuthenticated, userRole } = useAuth();
+    const { logout, setIsAuthenticated, userRole, userName } = useAuth();
     const navigate = useNavigate();
 
     const handleLogout = async () => {
@@ -47,12 +48,17 @@ export function NavBarMain() {
                         <UserDropdown />
                     </>
                 ) : (
-                    <Link
-                        to="/unauthorized"
-                        className="pt-1 hover:text-yellow-300"
-                    >
-                        No Permitido...
-                    </Link>
+                    <>
+                        <Link
+                            to="/unauthorized"
+                            className="pt-1 hover:text-yellow-300"
+                        >
+                            No Permitido...
+                        </Link>
+                        <Link className="pt-0 hover:text-yellow-300">
+                            <EmployeeFormDropdown />
+                        </Link>
+                    </>
                 )}
                 <Link to={'/'} className="pt-1 hover:text-yellow-200">
                     Home

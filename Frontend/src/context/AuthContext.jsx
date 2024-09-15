@@ -14,6 +14,7 @@ export const AuthProvider = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(null);
     const [loading, setLoading] = useState(true);
     const [userRole, setUserRole] = useState(null);
+    const [userName, setUserName] = useState(null);
 
     useEffect(() => {
         const checkAuth = async () => {
@@ -21,15 +22,13 @@ export const AuthProvider = ({ children }) => {
                 const response = await loginCheck();
 
                 setIsAuthenticated(response.data.isAuthenticated);
-
-                console.log('Data del usuario: ', response.data);
-
                 setUserRole(response.data.user?.roles); // Se guardar el rol...
 
                 console.log(response.data.user?.roles);
             } catch (error) {
                 setIsAuthenticated(false);
                 setUserRole(null);
+                setUserName(null);
             } finally {
                 setLoading(false);
             }
@@ -45,6 +44,7 @@ export const AuthProvider = ({ children }) => {
     const logout = () => {
         setIsAuthenticated(false);
         setUserRole(null);
+        setUserName(null);
     };
 
     return (
@@ -56,6 +56,8 @@ export const AuthProvider = ({ children }) => {
                 setUserRole,
                 logout,
                 setIsAuthenticated,
+                userName,
+                setUserName,
             }}
         >
             {children}

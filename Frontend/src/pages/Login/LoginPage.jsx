@@ -11,7 +11,8 @@ export function LoginPage() {
     const { register, handleSubmit } = useForm();
     const [errors, setErrors] = useState([]);
     const navigate = useNavigate();
-    const { setIsAuthenticated, userRole, setUserRole } = useAuth();
+    const { setIsAuthenticated, userRole, setUserRole, userName, setUserName } =
+        useAuth();
     const [isLoading, setIsLoading] = useState(false);
 
     const onSubmit = async (data) => {
@@ -26,7 +27,9 @@ export function LoginPage() {
 
             if (response.status === 200) {
                 const role = response.data.usuarioReg.roles || [];
-
+                const fullName = response.data.employeeFullName;
+                //
+                setUserName(fullName);
                 setUserRole(role);
                 setIsAuthenticated(true);
 
@@ -34,7 +37,8 @@ export function LoginPage() {
                 if (role === 'Owner' || role === 'Admin') {
                     navigate('/employees');
                 } else if (role === 'Empleado') {
-                    navigate('/volquetas/planilla/add');
+                    navigate('/volquetas');
+                    // navigate('/volquetas/planilla/add');
                 } else {
                     navigate('/unauthorized');
                 }
@@ -45,6 +49,12 @@ export function LoginPage() {
             setIsLoading(false); // Se oculta el spinner de carga...
         }
     };
+
+    useEffect(() => {
+        if (userName) {
+            console.log('Nombre completo actualizado: ', userName);
+        }
+    }, [userName]);
 
     useEffect(() => {
         if (errors.length > 0) {
