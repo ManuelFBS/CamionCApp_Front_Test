@@ -40,6 +40,8 @@ export function VolquetasFormPage() {
                 });
 
                 reset();
+
+                setIsLoading(false);
             }
         } catch (error) {
             swal2.fire({
@@ -47,6 +49,7 @@ export function VolquetasFormPage() {
                 text: `Ha ocurrido un error inesperado: ${error.message}. Si el error persiste, contacte con el Desarrollador del software...!!!`,
                 icon: 'error',
             });
+            setIsLoading(false);
         }
     };
 

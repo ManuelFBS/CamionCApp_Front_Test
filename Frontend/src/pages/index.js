@@ -9,4 +9,5 @@ export { UsersFormLockUnlockPage } from './Users/UsersFormLockUnlockPage';
 export { UsersPage } from './Users/UsersPage';
 export { VolquetasPage } from './VolquetasForm/VolquetasPage';
 export { VolquetasFormPage } from './VolquetasForm/VolquetasFormPage';
+export { RefuelingFormPage } from './Refueling/RefuelingFormPage';
 export { UnauthorizedPage } from './UnauthorizedPage/UnauthorizedPage';
