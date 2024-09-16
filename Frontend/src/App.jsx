@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-undef */
 /* eslint-disable no-unused-vars */
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import {
@@ -10,7 +11,7 @@ import {
     UsersFormAddPage,
     UsersFormLockUnlockPage,
     UsersPage,
-    VolquetasPage,
+    GeneralAccessPage,
     VolquetasFormPage,
     RefuelingFormPage,
     UnauthorizedPage,
@@ -102,7 +103,10 @@ function App() {
                                 </ProtectedRoute>
                             }
                         />
-                        <Route path="/volquetas" element={<VolquetasPage />} />
+                        <Route
+                            path="/general_access"
+                            element={<GeneralAccessPage />}
+                        />
                         <Route
                             path="/volquetas/planilla/add"
                             element={

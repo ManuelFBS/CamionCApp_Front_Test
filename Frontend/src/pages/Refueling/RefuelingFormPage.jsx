@@ -1,3 +1,5 @@
+/* eslint-disable no-empty */
+/* eslint-disable no-unused-vars */
 import { Button, Input, Label } from '../../components/UI';
 import { useForm } from 'react-hook-form';
 import { createNewRefuelingForm } from '../../../api/refueling';
@@ -19,7 +21,33 @@ export function RefuelingFormPage() {
     const onSubmit = async (data) => {
         try {
             setIsLoading(true);
-        } catch (error) {}
+
+            const response = await createNewRefuelingForm(data);
+
+            if (response.status === 201) {
+                swal2.fire({
+                    title: 'Registro exitoso...!',
+                    text: `La nueva planilla de tanqueo Nº ${data.n_planilla} ha sido registrada exitosamente...!!!\n\nDesea agregar un nuevo empleado?`,
+                    icon: 'success',
+                    confirmButtonText: 'Aceptar',
+                });
+            }
+
+            reset();
+            setIsLoading(false);
+        } catch (error) {
+            swal2.fire({
+                title: 'Error inesperado...!',
+                text: `Ha ocurrido un error inesperado: ${error.message}. Si el error persiste, contacte con el Desarrollador del software...!!!`,
+                icon: 'error',
+            });
+            setIsLoading(false);
+        }
+    };
+
+    const onCancel = () => {
+        reset();
+        navigate('/general_access');
     };
 
     return (
@@ -82,7 +110,7 @@ export function RefuelingFormPage() {
                             <div>
                                 <Label htmlFor="n_recibo">Nº Recibo</Label>
                                 <Input
-                                    type="number"
+                                    type="text"
                                     placeholder="Escriba el nro del recibo..."
                                     {...register('n_recibo', {
                                         required: 'Este campo es obligatorio',
@@ -173,7 +201,8 @@ export function RefuelingFormPage() {
                         <div className="flex justify-between">
                             <div>
                                 <Button
-                                    type="reset"
+                                    type="button"
+                                    onClick={onCancel}
                                     className="bg-red-600 w-32 mb-2 hover:bg-red-400"
                                 >
                                     Cancelar

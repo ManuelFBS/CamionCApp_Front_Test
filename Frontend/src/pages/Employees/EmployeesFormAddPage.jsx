@@ -28,6 +28,8 @@ export function EmployeesFormAddPage() {
             const response = await addEmployeeRequest(payload);
 
             if (response.status === 201) {
+                setIsLoading(false);
+
                 swal2
                     .fire({
                         title: 'Registro exitoso...!',
@@ -54,6 +56,7 @@ export function EmployeesFormAddPage() {
                 text: `Ha ocurrido un error inesperado: ${error.message}. Si el error persiste, contacte con el Deassarrollador del software...!!!`,
                 icon: 'error',
             });
+            setIsLoading(false);
         }
     };
 

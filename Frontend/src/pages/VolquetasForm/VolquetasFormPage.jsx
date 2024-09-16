@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-empty */
 /* eslint-disable no-unused-vars */
 import { Button, Input, Label } from '../../components/UI';
@@ -53,6 +54,11 @@ export function VolquetasFormPage() {
         }
     };
 
+    const onCancel = () => {
+        reset();
+        navigate('/general_access');
+    };
+
     return (
         <div className="bg-otherpages min-h-screen">
             {isLoading && (
@@ -61,10 +67,10 @@ export function VolquetasFormPage() {
                 </div>
             )}{' '}
             {/* Se renderiza si es true... */}
-            <div className="flex h-[calc(100vh-100px)] items-center justify-center mt-24">
-                <div className="bg-zinc-100 border-4 border-red-600 max-w-md w-full p-0 rounded-md">
-                    <div className="bg-red-600 flex items-stretch">
-                        <h2 className="text-2xl font-bold italic ml-32 mb-2 text-gray-100">
+            <div className="flex h-[calc(100vh-100px)] items-center justify-center -mt-4">
+                <div className="bg-zinc-100 border-4 border-red-600 max-w-3xl w-full p-0 rounded-md">
+                    <div className="bg-red-600 flex justify-items-center">
+                        <h2 className="text-2xl font-bold italic ml-72 mb-2 text-gray-100">
                             Nueva Planilla
                         </h2>
                     </div>
@@ -73,8 +79,8 @@ export function VolquetasFormPage() {
                         onSubmit={handleSubmit(onSubmit)}
                         className="pt-5 pl-6 pr-6 pb-4"
                     >
-                        {/* Nro de planilla --- Fecha */}
-                        <div className="grid grid-cols-2 gap-3">
+                        {/* Nro de planilla --- Cédula --- Fecha */}
+                        <div className="grid grid-cols-3 gap-3">
                             <div>
                                 <Label htmlFor="n_planilla">Nº Planilla</Label>
                                 <Input
@@ -105,25 +111,6 @@ export function VolquetasFormPage() {
                                     </p>
                                 )}
                             </div>
-                        </div>
-
-                        {/* Placa --- Cédula */}
-                        <div className="grid grid-cols-2 gap-3">
-                            <div>
-                                <Label htmlFor="placa_vehiculo">Placa</Label>
-                                <Input
-                                    type="text"
-                                    placeholder="Escriba la placa..."
-                                    {...register('placa_vehiculo', {
-                                        required: 'Este campo es obligatorio',
-                                    })}
-                                />
-                                {errors.placa_vehiculo && (
-                                    <p className="text-red-700">
-                                        {errors.placa_vehiculo.message}
-                                    </p>
-                                )}
-                            </div>
 
                             <div>
                                 <Label htmlFor="cedula">
@@ -144,8 +131,24 @@ export function VolquetasFormPage() {
                             </div>
                         </div>
 
-                        {/* Cliente --- Volumen de carga */}
-                        <div className="grid grid-cols-2 gap-3">
+                        {/* Placa ---  Cliente --- Volumen de carga */}
+                        <div className="grid grid-cols-3 gap-3">
+                            <div>
+                                <Label htmlFor="placa_vehiculo">Placa</Label>
+                                <Input
+                                    type="text"
+                                    placeholder="Escriba la placa..."
+                                    {...register('placa_vehiculo', {
+                                        required: 'Este campo es obligatorio',
+                                    })}
+                                />
+                                {errors.placa_vehiculo && (
+                                    <p className="text-red-700">
+                                        {errors.placa_vehiculo.message}
+                                    </p>
+                                )}
+                            </div>
+
                             <div>
                                 <Label htmlFor="cliente">Cliente</Label>
                                 <Input
@@ -181,26 +184,8 @@ export function VolquetasFormPage() {
                             </div>
                         </div>
 
-                        {/* Nro de viajes --- Material */}
-                        <div className="grid grid-cols-2 gap-3">
-                            <div>
-                                <Label htmlFor="n_viajes">
-                                    Cantidad de viajes
-                                </Label>
-                                <Input
-                                    type="number"
-                                    placeholder="Escriba la cantidad de viajes..."
-                                    {...register('n_viajes', {
-                                        required: 'Este campo es obligatorio',
-                                    })}
-                                />
-                                {errors.n_viajes && (
-                                    <p className="text-red-700">
-                                        {errors.n_viajes.message}
-                                    </p>
-                                )}
-                            </div>
-
+                        {/*  Material --- Lugar de carga --- Lugar de descarga */}
+                        <div className="grid grid-cols-3 gap-3">
                             <div>
                                 <Label htmlFor="material">Material</Label>
                                 <Input
@@ -216,80 +201,7 @@ export function VolquetasFormPage() {
                                     </p>
                                 )}
                             </div>
-                        </div>
 
-                        {/* Hora Inicio --- Hora Final */}
-                        <div className="grid grid-cols-2 gap-3">
-                            <div>
-                                <Label htmlFor="hora_inicio">Hora Inicio</Label>
-                                <Input
-                                    type="datetime-local"
-                                    placeholder="Coloque hora de inicio..."
-                                    {...register('hora_inicio', {
-                                        required: 'Este campo es obligatorio',
-                                    })}
-                                />
-                                {errors.hora_inicio && (
-                                    <p className="text-red-700">
-                                        {errors.hora_inicio.message}
-                                    </p>
-                                )}
-                            </div>
-
-                            <div>
-                                <Label htmlFor="hora_final">Hora Final</Label>
-                                <Input
-                                    type="datetime-local"
-                                    placeholder="Coloque hora de fin..."
-                                    {...register('hora_final', {
-                                        required: 'Este campo es obligatorio',
-                                    })}
-                                />
-                                {errors.hora_final && (
-                                    <p className="text-red-700">
-                                        {errors.hora_final.message}
-                                    </p>
-                                )}
-                            </div>
-                        </div>
-
-                        {/* Kilometraje Inicio --- Kilometraje Final */}
-                        <div className="grid grid-cols-2 gap-3">
-                            <div>
-                                <Label htmlFor="km_inicial">Klm Inicial</Label>
-                                <Input
-                                    type="number"
-                                    placeholder="Coloque klm de inicial..."
-                                    {...register('km_inicial', {
-                                        required: 'Este campo es obligatorio',
-                                    })}
-                                />
-                                {errors.km_inicial && (
-                                    <p className="text-red-700">
-                                        {errors.km_inicial.message}
-                                    </p>
-                                )}
-                            </div>
-
-                            <div>
-                                <Label htmlFor="km_final">Klm Final</Label>
-                                <Input
-                                    type="number"
-                                    placeholder="Coloque klm de final..."
-                                    {...register('km_final', {
-                                        required: 'Este campo es obligatorio',
-                                    })}
-                                />
-                                {errors.km_final && (
-                                    <p className="text-red-700">
-                                        {errors.km_final.message}
-                                    </p>
-                                )}
-                            </div>
-                        </div>
-
-                        {/* Lugar de carga --- Lugar de descarga */}
-                        <div className="grid grid-cols-2 gap-3">
                             <div>
                                 <Label htmlFor="lugar_de_cargue">
                                     Lugar de Carga
@@ -327,31 +239,129 @@ export function VolquetasFormPage() {
                             </div>
                         </div>
 
-                        {/* Observaciones */}
-                        <div className="grid grid-cols-1 gap-3">
-                            <Label htmlFor="observacion">Observación</Label>
-                            <textarea
-                                rows="3"
-                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                placeholder="Escriba sus observaciones..."
-                                {...register('observacion', {
-                                    required: 'Este campo es obligatorio',
-                                })}
-                            />
-                            {errors.observacion && (
-                                <p className="text-red-700">
-                                    {errors.observacion.message}
-                                </p>
-                            )}
+                        {/* Nro de viajes --- Hora inicio --- Hora final */}
+                        <div className="grid grid-cols-3 gap-3">
+                            <div>
+                                <Label htmlFor="n_viajes">
+                                    Cantidad de viajes
+                                </Label>
+                                <Input
+                                    type="number"
+                                    placeholder="Escriba la cantidad de viajes..."
+                                    {...register('n_viajes', {
+                                        required: 'Este campo es obligatorio',
+                                    })}
+                                />
+                                {errors.n_viajes && (
+                                    <p className="text-red-700">
+                                        {errors.n_viajes.message}
+                                    </p>
+                                )}
+                            </div>
+
+                            <div>
+                                <Label htmlFor="hora_inicio">Hora Inicio</Label>
+                                <Input
+                                    type="datetime-local"
+                                    placeholder="Coloque hora de inicio..."
+                                    {...register('hora_inicio', {
+                                        required: 'Este campo es obligatorio',
+                                    })}
+                                />
+                                {errors.hora_inicio && (
+                                    <p className="text-red-700">
+                                        {errors.hora_inicio.message}
+                                    </p>
+                                )}
+                            </div>
+
+                            <div>
+                                <Label htmlFor="hora_final">Hora Final</Label>
+                                <Input
+                                    type="datetime-local"
+                                    placeholder="Coloque hora de fin..."
+                                    {...register('hora_final', {
+                                        required: 'Este campo es obligatorio',
+                                    })}
+                                />
+                                {errors.hora_final && (
+                                    <p className="text-red-700">
+                                        {errors.hora_final.message}
+                                    </p>
+                                )}
+                            </div>
                         </div>
 
-                        <div className="flex justify-end">
-                            <Button
-                                type="submit"
-                                className="bg-slate-500 w-1/3 mt-3 mb-4 hover:bg-slate-400"
-                            >
-                                Aceptar
-                            </Button>
+                        {/* Kilometraje Inicio --- Kilometraje Final --- Observaciones*/}
+                        <div className="grid grid-cols-4 gap-3">
+                            <div className="col-span-1">
+                                <Label htmlFor="km_inicial">Klm Inicial</Label>
+                                <Input
+                                    type="number"
+                                    placeholder="Coloque klm de inicial..."
+                                    {...register('km_inicial', {
+                                        required: 'Este campo es obligatorio',
+                                    })}
+                                />
+                                {errors.km_inicial && (
+                                    <p className="text-red-700">
+                                        {errors.km_inicial.message}
+                                    </p>
+                                )}
+                            </div>
+
+                            <div className="col-span-1">
+                                <Label htmlFor="km_final">Klm Final</Label>
+                                <Input
+                                    type="number"
+                                    placeholder="Coloque klm de final..."
+                                    {...register('km_final', {
+                                        required: 'Este campo es obligatorio',
+                                    })}
+                                />
+                                {errors.km_final && (
+                                    <p className="text-red-700">
+                                        {errors.km_final.message}
+                                    </p>
+                                )}
+                            </div>
+
+                            <div className="col-span-2">
+                                <Label htmlFor="observacion">Observación</Label>
+                                <textarea
+                                    rows="2"
+                                    className="shadow appearance-none border rounded w-full mt-1 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    placeholder="Escriba sus observaciones..."
+                                    {...register('observacion', {
+                                        required: 'Este campo es obligatorio',
+                                    })}
+                                />
+                                {errors.observacion && (
+                                    <p className="text-red-700">
+                                        {errors.observacion.message}
+                                    </p>
+                                )}
+                            </div>
+                        </div>
+
+                        <div className="flex justify-end gap-5 mt-3">
+                            <div>
+                                <Button
+                                    type="button"
+                                    onClick={onCancel}
+                                    className="bg-red-600 w-48 mb-2 hover:bg-red-400"
+                                >
+                                    Cancelar
+                                </Button>
+                            </div>
+                            <div>
+                                <Button
+                                    type="submit"
+                                    className="bg-slate-500 w-48 mb-2 hover:bg-slate-400"
+                                >
+                                    Aceptar
+                                </Button>
+                            </div>
                         </div>
                     </form>
                 </div>
