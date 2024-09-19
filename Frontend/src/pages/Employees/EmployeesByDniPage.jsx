@@ -28,7 +28,9 @@ export function EmployeeByDniPage() {
             const response = await getEmployeeByDniRequest(cedula);
 
             setEmployee(response.data);
+            setLoading(false);
         } catch (error) {
+            setLoading(false);
             setError('Empleado no encontrado...!!!');
         } finally {
             setLoading(false);
@@ -43,14 +45,14 @@ export function EmployeeByDniPage() {
                 </div>
             )}{' '}
             {/* Se renderiza si es true... */}
-            <div className="flex flex-col items-center mt-12 mx-auto w-full max-w-md">
-                <div className="bg-zinc-100 border-4 border-red-600 w-full p-0 rounded-md">
-                    <div className="bg-red-600 flex items-stretch">
-                        <h2 className="text-2xl font-bold italic ml-16 mb-2 text-gray-100">
+            <div className="customDiv-1a">
+                <div className="customDiv-2">
+                    <div className="customDivH2">
+                        <h2 className="customH2 ml-16">
                             Buscar Empleado por Cédula
                         </h2>
                     </div>
-                    <form className="pt-5 pl-6 pr-6 pb-4">
+                    <form className="customFormDiv">
                         <div>
                             <div>
                                 <Label htmlFor="cedula">Cédula</Label>

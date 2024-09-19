@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { Button, Input, Label } from '../../components/UI';
 import { useForm } from 'react-hook-form';
 import { addEmployeeRequest } from '../../../api/employees';
@@ -5,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { Loading } from '../../components/Loading/Loading';
 import swal2 from 'sweetalert2';
+import '../../styles/global.css';
 
 export function EmployeesFormAddPage() {
     const {
@@ -28,6 +30,8 @@ export function EmployeesFormAddPage() {
             const response = await addEmployeeRequest(payload);
 
             if (response.status === 201) {
+                setIsLoading(false);
+
                 swal2
                     .fire({
                         title: 'Registro exitoso...!',
@@ -54,7 +58,13 @@ export function EmployeesFormAddPage() {
                 text: `Ha ocurrido un error inesperado: ${error.message}. Si el error persiste, contacte con el Deassarrollador del software...!!!`,
                 icon: 'error',
             });
+            setIsLoading(false);
         }
+    };
+
+    const onCancel = () => {
+        reset();
+        navigate('/employees');
     };
 
     return (
@@ -65,18 +75,16 @@ export function EmployeesFormAddPage() {
                 </div>
             )}{' '}
             {/* Se renderiza si es true... */}
-            <div className="flex h-[calc(100vh-100px)] items-center justify-center">
-                <div className="bg-zinc-100 border-4 border-red-600 max-w-md w-full p-0 rounded-md">
-                    <div className="bg-red-600 flex items-stretch">
-                        <h2 className="text-2xl font-bold italic ml-24 mb-2 text-gray-100">
-                            Nuevo Empleado
-                        </h2>
+            <div className="customDiv-1">
+                <div className="customDiv-2">
+                    <div className="customDivH2">
+                        <h2 className="customH2 ml-28">Nuevo Empleado</h2>
                     </div>
                     <form
                         onSubmit={handleSubmit(onSubmit)}
-                        className="pt-5 pl-6 pr-6 pb-4"
+                        className="customFormDiv"
                     >
-                        <div className="grid grid-cols-2 gap-3">
+                        <div className="customFormGrid">
                             <div>
                                 <Label htmlFor="nombres">Nombres</Label>
                                 <Input
@@ -110,7 +118,7 @@ export function EmployeesFormAddPage() {
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-2 gap-3">
+                        <div className="customFormGrid">
                             <div>
                                 <Label htmlFor="cedula">Cédula</Label>
                                 <Input
@@ -170,7 +178,7 @@ export function EmployeesFormAddPage() {
                             </p>
                         )}
 
-                        <div className="grid grid-cols-2 gap-3">
+                        <div className="customFormGrid">
                             <div>
                                 <Label htmlFor="telefono">Teléfono</Label>
                                 <Input
@@ -214,7 +222,7 @@ export function EmployeesFormAddPage() {
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-2 gap-3">
+                        <div className="customFormGrid">
                             <div>
                                 <Label htmlFor="fecha_inicio_contrato">
                                     Fecha inicio de contrato
@@ -248,13 +256,25 @@ export function EmployeesFormAddPage() {
                             </div>
                         </div>
 
-                        <div className="flex justify-end">
-                            <Button
-                                type="submit"
-                                className="bg-slate-500 w-1/3 mt-3 mb-4 hover:bg-slate-400"
-                            >
-                                Aceptar
-                            </Button>
+                        {/* Botones... */}
+                        <div className="flex justify-between">
+                            <div>
+                                <Button
+                                    type="button"
+                                    onClick={onCancel}
+                                    className="bg-red-600 w-36 mb-2 hover:bg-red-400"
+                                >
+                                    Cancelar
+                                </Button>
+                            </div>
+                            <div>
+                                <Button
+                                    type="submit"
+                                    className="bg-slate-500 w-36 mb-2 hover:bg-slate-400"
+                                >
+                                    Aceptar
+                                </Button>
+                            </div>
                         </div>
                     </form>
                 </div>

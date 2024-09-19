@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Button, Input, Label } from '../../components/UI';
 import { useForm } from 'react-hook-form';
 import { loginRequest } from '../../../api/auth';
@@ -10,7 +11,8 @@ export function LoginPage() {
     const { register, handleSubmit } = useForm();
     const [errors, setErrors] = useState([]);
     const navigate = useNavigate();
-    const { setIsAuthenticated } = useAuth();
+    const { setIsAuthenticated, userRole, setUserRole, userName, setUserName } =
+        useAuth();
     const [isLoading, setIsLoading] = useState(false);
 
     const onSubmit = async (data) => {
@@ -24,8 +26,22 @@ export function LoginPage() {
             console.log(response.data);
 
             if (response.status === 200) {
+                const role = response.data.usuarioReg.roles || [];
+                const fullName = response.data.employeeFullName;
+                //
+                setUserName(fullName);
+                setUserRole(role);
                 setIsAuthenticated(true);
-                navigate('/employees');
+
+                // Redirigir según el rol del usuario...
+                if (role === 'Owner' || role === 'Admin') {
+                    navigate('/employees');
+                } else if (role === 'Empleado') {
+                    navigate('/general_access');
+                    // navigate('/volquetas/planilla/add');
+                } else {
+                    navigate('/unauthorized');
+                }
             }
         } catch (error) {
             setErrors([error.response?.data?.message]);
@@ -33,6 +49,12 @@ export function LoginPage() {
             setIsLoading(false); // Se oculta el spinner de carga...
         }
     };
+
+    useEffect(() => {
+        if (userName) {
+            console.log('Nombre completo actualizado: ', userName);
+        }
+    }, [userName]);
 
     useEffect(() => {
         if (errors.length > 0) {

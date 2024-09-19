@@ -1,9 +1,10 @@
+/* eslint-disable no-empty */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 
-export const EmployeeDropdown = () => {
+export const EmployeeFormDropdown = () => {
     const [isOpen, setIsOpen] = useState(false);
     const { isAuthenticated } = useAuth();
     const menuRef = useRef(null);
@@ -31,39 +32,26 @@ export const EmployeeDropdown = () => {
     return (
         <div className="relative" ref={menuRef}>
             <button onClick={toggleMenu} className="pt-1 hover:text-yellow-200">
-                Personal
+                Empleado
             </button>
             {isOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
                     {isAuthenticated ? (
                         <>
                             <Link
-                                to={'employees/add'}
+                                to={'volquetas/planilla/add'}
                                 onClick={() => setIsOpen(false)}
                                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                             >
-                                Agregar nuevo...
+                                Nueva planilla Volquetas
                             </Link>
+
                             <Link
-                                to={'/employees'}
+                                to={'refueling/planilla/add'}
                                 onClick={() => setIsOpen(false)}
                                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                             >
-                                Mostrar todos...
-                            </Link>
-                            <Link
-                                to={'/employees/bydni'}
-                                onClick={() => setIsOpen(false)}
-                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                            >
-                                Buscar por cédula...
-                            </Link>
-                            <Link
-                                to={'/employees/employee/edit'}
-                                onClick={() => setIsOpen(false)}
-                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                            >
-                                Actualizar Empleado...
+                                Nueva planilla Tanqueo
                             </Link>
                         </>
                     ) : (

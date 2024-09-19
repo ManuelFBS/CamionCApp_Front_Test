@@ -7,3 +7,9 @@ export { UpdateEmployeeByDni } from './Employees/UpdateEmployeeFormByDniPage';
 export { UsersFormAddPage } from './Users/UsersFormAddPage';
 export { UsersFormLockUnlockPage } from './Users/UsersFormLockUnlockPage';
 export { UsersPage } from './Users/UsersPage';
+//
+export { GeneralAccessPage } from './GeneralAccess/GeneralAccessPage';
+export { VolquetasFormPage } from './VolquetasForm/VolquetasFormPage';
+export { RefuelingFormPage } from './Refueling/RefuelingFormPage';
+//
+export { UnauthorizedPage } from './UnauthorizedPage/UnauthorizedPage';
