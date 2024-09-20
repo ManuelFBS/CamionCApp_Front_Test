@@ -27,7 +27,7 @@ export function RefuelingFormPage() {
             if (response.status === 201) {
                 swal2.fire({
                     title: 'Registro exitoso...!',
-                    text: `La nueva planilla de tanqueo Nº ${data.n_planilla} ha sido registrada exitosamente...!!!\n\nDesea agregar un nuevo empleado?`,
+                    text: `La nueva planilla de tanqueo Nº ${data.n_recibo} ha sido registrada exitosamente...!!!\n\nDesea agregar un nuevo empleado?`,
                     icon: 'success',
                     confirmButtonText: 'Aceptar',
                 });
@@ -36,6 +36,7 @@ export function RefuelingFormPage() {
             reset();
             setIsLoading(false);
         } catch (error) {
+            console.log(error);
             swal2.fire({
                 title: 'Error inesperado...!',
                 text: `Ha ocurrido un error inesperado: ${error.message}. Si el error persiste, contacte con el Desarrollador del software...!!!`,
@@ -182,17 +183,17 @@ export function RefuelingFormPage() {
                         {/* Placas */}
                         <div className="grid grid-cols-2 gap-3">
                             <div>
-                                <Label htmlFor="vehiculo_placa">Placas</Label>
+                                <Label htmlFor="placas">Placas</Label>
                                 <Input
                                     type="text"
                                     placeholder="Escriba la placa..."
-                                    {...register('vehiculo_placa', {
+                                    {...register('placas', {
                                         required: 'Este campo es obligatorio',
                                     })}
                                 />
-                                {errors.vehiculo_placa && (
+                                {errors.placas && (
                                     <p className="text-red-700">
-                                        {errors.vehiculo_placa.message}
+                                        {errors.placas.message}
                                     </p>
                                 )}
                             </div>
