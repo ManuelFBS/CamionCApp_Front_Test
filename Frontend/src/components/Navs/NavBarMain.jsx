@@ -4,6 +4,7 @@ import { logoutRequest } from '../../../api/auth';
 import { EmployeeDropdown } from '../Menu/EmployeeDropdown';
 import { UserDropdown } from '../Menu/UserDropdown';
 import { EmployeeFormDropdown } from '../Menu/EmployeesFormDropdown';
+import { VehicleFormDropdown } from '../Menu/VehicleFormDropdown';
 import { useAuth } from '../../context/AuthContext';
 
 export function NavBarMain() {
@@ -46,6 +47,7 @@ export function NavBarMain() {
                     <>
                         <EmployeeDropdown />
                         <UserDropdown />
+                        <VehicleFormDropdown />
                     </>
                 ) : (
                     <>

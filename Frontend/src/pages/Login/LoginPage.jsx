@@ -1,8 +1,13 @@
+/* eslint-disable no-empty */
 /* eslint-disable no-unused-vars */
 import { Button, Input, Label } from '../../components/UI';
 import { useForm } from 'react-hook-form';
 import { loginRequest } from '../../../api/auth';
 import { useAuth } from '../../context/AuthContext';
+import {
+    getDriverByDniRequest,
+    getVehicleByIDRequest,
+} from '../../../api/auth';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Loading } from '../../components/Loading/Loading';
@@ -11,21 +16,47 @@ export function LoginPage() {
     const { register, handleSubmit } = useForm();
     const [errors, setErrors] = useState([]);
     const navigate = useNavigate();
-    const { setIsAuthenticated, userRole, setUserRole, userName, setUserName } =
-        useAuth();
+    const {
+        setIsAuthenticated,
+        // userRole,
+        setUserRole,
+        userName,
+        setUserName,
+        // dni,
+        setDNI,
+        // vehicleRegistrationPlate,
+        setVehicleRegistrationPlate,
+    } = useAuth();
     const [isLoading, setIsLoading] = useState(false);
 
     const onSubmit = async (data) => {
         try {
             setIsLoading(true); // Mostrar spinner de carga...
 
-            console.log(data);
-
             const response = await loginRequest(data);
 
-            console.log(response.data);
+            console.log('Datos del usuario: ', response.data);
 
             if (response.status === 200) {
+                const driverData = await getDriverByDniRequest(
+                    response.data.usuarioReg.usuario_cedula,
+                );
+                setDNI(driverData.data.cedula);
+                //
+                // // console.log('Cédula Nº :', driverData.data.cedula);
+
+                //
+                if (driverData.data.vehiculos[0] !== undefined) {
+                    const getVehRegPlate = await getVehicleByIDRequest(
+                        driverData.data.vehiculos[0],
+                    );
+                    setVehicleRegistrationPlate(getVehRegPlate.data.data.placa);
+                    // console.log(
+                    //     'Placas del vehículo asignado: ',
+                    //     getVehRegPlate.data.data.placa,
+                    // );
+                }
+
                 const role = response.data.usuarioReg.roles || [];
                 const fullName = response.data.employeeFullName;
                 //

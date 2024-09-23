@@ -1,3 +1,4 @@
+/* eslint-disable no-prototype-builtins */
 import { Button, Input, Label } from '../../components/UI';
 import { useForm } from 'react-hook-form';
 import {

@@ -5,9 +5,10 @@ import { Button, Input, Label } from '../../components/UI';
 import { useForm } from 'react-hook-form';
 import { createNewVolquetaForm } from '../../../api/volquetas';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Loading } from '../../components/Loading/Loading';
 import swal2 from 'sweetalert2';
+import { useAuth } from '../../context/AuthContext';
 
 export function VolquetasFormPage() {
     const {
@@ -15,7 +16,9 @@ export function VolquetasFormPage() {
         handleSubmit,
         formState: { errors },
         reset,
+        setValue,
     } = useForm();
+    const { dni, vehicleRegistrationPlate } = useAuth();
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
 
@@ -23,19 +26,25 @@ export function VolquetasFormPage() {
         try {
             setIsLoading(true);
 
-            data.hora_inicio = new Date(data.hora_inicio);
-            data.hora_final = new Date(data.hora_final);
+            const _data = {
+                ...data,
+                cedula: dni,
+                placa_vehiculo: vehicleRegistrationPlate,
+            };
 
-            if (data.observacion === undefined) {
-                data.observacion = 'S/O';
+            _data.hora_inicio = new Date(_data.hora_inicio);
+            _data.hora_final = new Date(_data.hora_final);
+
+            if (_data.observacion === undefined) {
+                _data.observacion = 'S/O';
             }
 
-            const response = await createNewVolquetaForm(data);
+            const response = await createNewVolquetaForm(_data);
 
             if (response.status === 201) {
                 swal2.fire({
                     title: 'Registro exitoso...!',
-                    text: `La planilla Nº ${data.n_planilla} ha sido registrada exitosamente...!!!`,
+                    text: `La planilla Nº ${_data.n_planilla} ha sido registrada exitosamente...!!!`,
                     icon: 'success',
                     confirmButtonText: 'Aceptar',
                 });
@@ -113,21 +122,10 @@ export function VolquetasFormPage() {
                             </div>
 
                             <div>
-                                <Label htmlFor="cedula">
-                                    Cédula del Conductor
-                                </Label>
-                                <Input
-                                    type="number"
-                                    placeholder="Escriba el nro de cédula..."
-                                    {...register('cedula', {
-                                        required: 'Este campo es obligatorio',
-                                    })}
-                                />
-                                {errors.cedula && (
-                                    <p className="text-red-700">
-                                        {errors.cedula.message}
-                                    </p>
-                                )}
+                                <Label htmlFor="cedula">Cédula Conductor</Label>
+                                <p className="border border-gray-300 bg-gray-200 rounded-md p-1.5 mt-1">
+                                    {dni || 'Cargando...'}
+                                </p>
                             </div>
                         </div>
 
@@ -135,18 +133,9 @@ export function VolquetasFormPage() {
                         <div className="grid grid-cols-3 gap-3">
                             <div>
                                 <Label htmlFor="placa_vehiculo">Placa</Label>
-                                <Input
-                                    type="text"
-                                    placeholder="Escriba la placa..."
-                                    {...register('placa_vehiculo', {
-                                        required: 'Este campo es obligatorio',
-                                    })}
-                                />
-                                {errors.placa_vehiculo && (
-                                    <p className="text-red-700">
-                                        {errors.placa_vehiculo.message}
-                                    </p>
-                                )}
+                                <p className="border border-gray-300 bg-gray-200 rounded-md p-1.5 mt-1.5 mb-3">
+                                    {vehicleRegistrationPlate || 'Cargando...'}
+                                </p>
                             </div>
 
                             <div>

@@ -7,3 +7,8 @@ export const logoutRequest = () =>
 
 export const loginCheck = () =>
     axios.get('/auth/checklogin', { withCredentials: true });
+
+export const getDriverByDniRequest = (cedula) =>
+    axios.get(`/auth/driverced/${cedula}`);
+
+export const getVehicleByIDRequest = (id) => axios.get(`/auth/vehicleid/${id}`);

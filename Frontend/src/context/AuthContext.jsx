@@ -16,6 +16,10 @@ export const AuthProvider = ({ children }) => {
     const [userRole, setUserRole] = useState(null);
     const [userName, setUserName] = useState(null);
 
+    const [dni, setDNI] = useState(null);
+    const [vehicleRegistrationPlate, setVehicleRegistrationPlate] =
+        useState(null);
+
     useEffect(() => {
         const checkAuth = async () => {
             try {
@@ -24,11 +28,13 @@ export const AuthProvider = ({ children }) => {
                 setIsAuthenticated(response.data.isAuthenticated);
                 setUserRole(response.data.user?.roles); // Se guardar el rol...
 
-                console.log(response.data.user?.roles);
+                // console.log('Rol del usuario: ', response.data.user?.roles);
             } catch (error) {
                 setIsAuthenticated(false);
                 setUserRole(null);
                 setUserName(null);
+                setDNI(null);
+                setVehicleRegistrationPlate(null);
             } finally {
                 setLoading(false);
             }
@@ -58,6 +64,10 @@ export const AuthProvider = ({ children }) => {
                 setIsAuthenticated,
                 userName,
                 setUserName,
+                dni,
+                setDNI,
+                vehicleRegistrationPlate,
+                setVehicleRegistrationPlate,
             }}
         >
             {children}

@@ -15,6 +15,8 @@ import {
     VolquetasFormPage,
     RefuelingFormPage,
     UnauthorizedPage,
+    VehicleFormAddPage,
+    AssignDriverToVehicleFormPage,
 } from './pages';
 import { EmployeesDetailsCard } from './components/Employees/EmployeesDetailsCard';
 import { NavBarMain } from './components/Navs/NavBarMain';
@@ -103,6 +105,25 @@ function App() {
                                 </ProtectedRoute>
                             }
                         />
+
+                        <Route
+                            path="/vehicles/planilla/add"
+                            element={
+                                <ProtectedRoute allowed={['Admin', 'Owner']}>
+                                    <VehicleFormAddPage />
+                                </ProtectedRoute>
+                            }
+                        />
+
+                        <Route
+                            path="/vehicles/vehassign"
+                            element={
+                                <ProtectedRoute allowed={['Admin', 'Owner']}>
+                                    <AssignDriverToVehicleFormPage />
+                                </ProtectedRoute>
+                            }
+                        />
+
                         <Route
                             path="/general_access"
                             element={<GeneralAccessPage />}

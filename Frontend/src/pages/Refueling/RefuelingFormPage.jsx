@@ -3,8 +3,9 @@
 import { Button, Input, Label } from '../../components/UI';
 import { useForm } from 'react-hook-form';
 import { createNewRefuelingForm } from '../../../api/refueling';
+import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Loading } from '../../components/Loading/Loading';
 import swal2 from 'sweetalert2';
 
@@ -14,7 +15,9 @@ export function RefuelingFormPage() {
         handleSubmit,
         formState: { errors },
         reset,
+        setValue,
     } = useForm();
+    const { dni, vehicleRegistrationPlate } = useAuth();
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
 
@@ -22,7 +25,13 @@ export function RefuelingFormPage() {
         try {
             setIsLoading(true);
 
-            const response = await createNewRefuelingForm(data);
+            const _data = {
+                ...data,
+                cedula: dni,
+                placas: vehicleRegistrationPlate,
+            };
+
+            const response = await createNewRefuelingForm(_data);
 
             if (response.status === 201) {
                 swal2.fire({
@@ -76,18 +85,9 @@ export function RefuelingFormPage() {
                                 <Label htmlFor="cedula">
                                     Cédula del Conductor
                                 </Label>
-                                <Input
-                                    type="number"
-                                    placeholder="Escriba el nro de cédula..."
-                                    {...register('cedula', {
-                                        required: 'Este campo es obligatorio',
-                                    })}
-                                />
-                                {errors.cedula && (
-                                    <p className="text-red-700">
-                                        {errors.cedula.message}
-                                    </p>
-                                )}
+                                <p className="border border-gray-300 bg-gray-200 rounded-md p-1.5 mt-1">
+                                    {dni || 'Cargando...'}
+                                </p>
                             </div>
 
                             <div>
@@ -184,18 +184,9 @@ export function RefuelingFormPage() {
                         <div className="grid grid-cols-2 gap-3">
                             <div>
                                 <Label htmlFor="placas">Placas</Label>
-                                <Input
-                                    type="text"
-                                    placeholder="Escriba la placa..."
-                                    {...register('placas', {
-                                        required: 'Este campo es obligatorio',
-                                    })}
-                                />
-                                {errors.placas && (
-                                    <p className="text-red-700">
-                                        {errors.placas.message}
-                                    </p>
-                                )}
+                                <p className="border border-gray-300 bg-gray-200 rounded-md p-1.5 mt-1.5 mb-3">
+                                    {vehicleRegistrationPlate || 'Cargando...'}
+                                </p>
                             </div>
                         </div>
 
