@@ -12,6 +12,7 @@ export { GeneralAccessPage } from './GeneralAccess/GeneralAccessPage';
 export { VolquetasFormPage } from './VolquetasForm/VolquetasFormPage';
 export { RefuelingFormPage } from './Refueling/RefuelingFormPage';
 //
+export { VehiclesPage } from './Vehicles/VehiclesPage';
 export { VehicleFormAddPage } from './Vehicles/VehicleFormAddPage';
 export { AssignDriverToVehicleFormPage } from './Vehicles/AssignDriverToVehicleForm';
 //

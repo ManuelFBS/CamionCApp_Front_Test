@@ -15,6 +15,7 @@ import {
     VolquetasFormPage,
     RefuelingFormPage,
     UnauthorizedPage,
+    VehiclesPage,
     VehicleFormAddPage,
     AssignDriverToVehicleFormPage,
 } from './pages';
@@ -107,6 +108,14 @@ function App() {
                         />
 
                         <Route
+                            path="/vehicles"
+                            element={
+                                <ProtectedRoute allowed={['Admin', 'Owner']}>
+                                    <VehiclesPage />
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route
                             path="/vehicles/planilla/add"
                             element={
                                 <ProtectedRoute allowed={['Admin', 'Owner']}>
@@ -114,7 +123,6 @@ function App() {
                                 </ProtectedRoute>
                             }
                         />
-
                         <Route
                             path="/vehicles/vehassign"
                             element={
