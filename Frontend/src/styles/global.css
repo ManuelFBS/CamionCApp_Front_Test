@@ -31,3 +31,7 @@
 .customFormGrid {
     @apply grid grid-cols-2 gap-3;
 }
+
+.customEspecialFormGrid {
+    @apply grid grid-cols-2 col-span-2;
+}

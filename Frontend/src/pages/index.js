@@ -7,13 +7,16 @@ export { UpdateEmployeeByDni } from './Employees/UpdateEmployeeFormByDniPage';
 export { UsersFormAddPage } from './Users/UsersFormAddPage';
 export { UsersFormLockUnlockPage } from './Users/UsersFormLockUnlockPage';
 export { UsersPage } from './Users/UsersPage';
-//
+// Volquetas...
 export { GeneralAccessPage } from './GeneralAccess/GeneralAccessPage';
 export { VolquetasFormPage } from './VolquetasForm/VolquetasFormPage';
+// Tanqueos...
 export { RefuelingFormPage } from './Refueling/RefuelingFormPage';
-//
+// Vehículos...
 export { VehiclesPage } from './Vehicles/VehiclesPage';
 export { VehicleFormAddPage } from './Vehicles/VehicleFormAddPage';
 export { AssignDriverToVehicleFormPage } from './Vehicles/AssignDriverToVehicleForm';
-//
+// Documentos...
+export { VehicleDocumentRegisterPage } from './Documents/VehicleDocumentRegPage';
+
 export { UnauthorizedPage } from './UnauthorizedPage/UnauthorizedPage';

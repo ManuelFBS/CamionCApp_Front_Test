@@ -18,6 +18,7 @@ import {
     VehiclesPage,
     VehicleFormAddPage,
     AssignDriverToVehicleFormPage,
+    VehicleDocumentRegisterPage,
 } from './pages';
 import { EmployeesDetailsCard } from './components/Employees/EmployeesDetailsCard';
 import { NavBarMain } from './components/Navs/NavBarMain';
@@ -128,6 +129,15 @@ function App() {
                             element={
                                 <ProtectedRoute allowed={['Admin', 'Owner']}>
                                     <AssignDriverToVehicleFormPage />
+                                </ProtectedRoute>
+                            }
+                        />
+
+                        <Route
+                            path="/documents/add"
+                            element={
+                                <ProtectedRoute allowed={['Admin', 'Owner']}>
+                                    <VehicleDocumentRegisterPage />
                                 </ProtectedRoute>
                             }
                         />
