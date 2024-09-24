@@ -2,3 +2,6 @@
 import axios from './axios';
 
 export const showAllVehiclesRequest = () => axios.get('/vehiculos');
+
+export const assigningVehicleToDriverRequest = (data) =>
+    axios.patch('/vehiculo/asignacion', data);

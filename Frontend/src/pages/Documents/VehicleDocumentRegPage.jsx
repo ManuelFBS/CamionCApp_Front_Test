@@ -36,6 +36,7 @@ export function VehicleDocumentRegisterPage() {
                 });
             }
         } catch (error) {
+            console.log(error);
             swal2.fire({
                 title: 'Error inesperado...!',
                 text: `Ha ocurrido un error inesperado: ${error.message}. Si el error persiste, contacte con el Deassarrollador del software...!!!`,
@@ -114,11 +115,11 @@ export function VehicleDocumentRegisterPage() {
                             className="w-full bg-gray-200 text-blue-700 px-4 py-2 rounded-md my-3 mt-1 mb-3"
                         >
                             <option value="">Seleccione una opción...</option>
-                            <option value="Poliza de seguro">
+                            <option value="Póliza de seguro">
                                 Poliza de seguro
                             </option>
                             <option value="Soat">Soat</option>
-                            <option value="tecnomecanica">Tecnomecánica</option>
+                            <option value="Tecnomecánica">Tecnomecánica</option>
                         </select>
 
                         {/* Fecha de Expedicion --- Fecha de Vencimiento */}

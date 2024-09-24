@@ -35,7 +35,7 @@ export function LoginPage() {
 
             const response = await loginRequest(data);
 
-            console.log('Datos del usuario: ', response.data);
+            // console.log('Datos del usuario: ', response.data);
 
             if (response.status === 200) {
                 const driverData = await getDriverByDniRequest(
@@ -43,18 +43,11 @@ export function LoginPage() {
                 );
                 setDNI(driverData.data.cedula);
                 //
-                // // console.log('Cédula Nº :', driverData.data.cedula);
-
-                //
                 if (driverData.data.vehiculos[0] !== undefined) {
                     const getVehRegPlate = await getVehicleByIDRequest(
                         driverData.data.vehiculos[0],
                     );
                     setVehicleRegistrationPlate(getVehRegPlate.data.data.placa);
-                    // console.log(
-                    //     'Placas del vehículo asignado: ',
-                    //     getVehRegPlate.data.data.placa,
-                    // );
                 }
 
                 const role = response.data.usuarioReg.roles || [];
