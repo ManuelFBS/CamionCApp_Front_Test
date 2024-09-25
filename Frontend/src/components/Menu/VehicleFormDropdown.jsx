@@ -39,6 +39,16 @@ export const VehicleFormDropdown = () => {
                     {isAuthenticated ? (
                         <>
                             <Link
+                                to={'/driverlicenses/add'}
+                                onClick={() => setIsOpen(false)}
+                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                            >
+                                Registrar Licencia
+                            </Link>
+
+                            <hr className="my-2 border-gray-400" />
+
+                            <Link
                                 to={'/vehicles/planilla/add'}
                                 onClick={() => setIsOpen(false)}
                                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"

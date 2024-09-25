@@ -16,7 +16,6 @@ export function VolquetasFormPage() {
         handleSubmit,
         formState: { errors },
         reset,
-        setValue,
     } = useForm();
     const { dni, vehicleRegistrationPlate } = useAuth();
     const navigate = useNavigate();
