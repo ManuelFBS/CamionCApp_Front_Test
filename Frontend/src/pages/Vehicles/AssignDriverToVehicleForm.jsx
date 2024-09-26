@@ -32,11 +32,13 @@ export function AssignDriverToVehicleFormPage() {
                     title: 'Registro exitoso...!',
                     text:
                         'El conductor con cédula ' +
-                        `${response.data.persona_cedula} le ha sido asignado` +
-                        `el vehículo placas ${response.data.placa} exitosamente...!!!`,
+                        `${data.persona_cedula} le ha sido asignado` +
+                        `el vehículo placas ${data.placa} exitosamente...!!!`,
                     icon: 'success',
                     confirmButtonText: 'Aceptar',
                 });
+
+                reset();
             }
         } catch (error) {
             console.log(error);

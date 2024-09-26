@@ -30,7 +30,7 @@ export function DriverLicenseFormAddPage() {
 
                 swal2.fire({
                     title: 'Registro exitoso...!',
-                    text: `La nueva licencia ${response.data.licencia_N} ha sido registrada exitosamente...!!!\n\nDesea agregar un nuevo empleado?`,
+                    text: `La nueva licencia ${response.data.licencia_N} ha sido registrada exitosamente...!!!`,
                     icon: 'success',
                     confirmButtonText: 'Aceptar',
                 });
@@ -63,7 +63,9 @@ export function DriverLicenseFormAddPage() {
             <div className="customDiv-1">
                 <div className="customDiv-2">
                     <div className="customDivH2">
-                        <h2 className="customH2 ml-28">Registrar Licencia</h2>
+                        <h2 className="customH2 ml-28">
+                            Registro de Licencias
+                        </h2>
                     </div>
 
                     <form

@@ -84,6 +84,7 @@ export function EmployeesFormAddPage() {
                         onSubmit={handleSubmit(onSubmit)}
                         className="customFormDiv"
                     >
+                        {/* Nombres --- Apellidos */}
                         <div className="customFormGrid">
                             <div>
                                 <Label htmlFor="nombres">Nombres</Label>
@@ -118,6 +119,7 @@ export function EmployeesFormAddPage() {
                             </div>
                         </div>
 
+                        {/* Cédula --- Fecha Nacimiento */}
                         <div className="customFormGrid">
                             <div>
                                 <Label htmlFor="cedula">Cédula</Label>
@@ -159,6 +161,7 @@ export function EmployeesFormAddPage() {
                             </div>
                         </div>
 
+                        {/* Correo */}
                         <Label htmlFor="correo">E-mail</Label>
                         <Input
                             type="email"
@@ -178,6 +181,7 @@ export function EmployeesFormAddPage() {
                             </p>
                         )}
 
+                        {/* Teléfono --- Tipo de Contrato*/}
                         <div className="customFormGrid">
                             <div>
                                 <Label htmlFor="telefono">Teléfono</Label>
@@ -222,6 +226,7 @@ export function EmployeesFormAddPage() {
                             </div>
                         </div>
 
+                        {/* Fecha Inicio Contrato --- Fecha Final Contrato */}
                         <div className="customFormGrid">
                             <div>
                                 <Label htmlFor="fecha_inicio_contrato">
@@ -257,7 +262,7 @@ export function EmployeesFormAddPage() {
                         </div>
 
                         {/* Botones... */}
-                        <div className="flex justify-between">
+                        <div className="customButtonContainer">
                             <div>
                                 <Button
                                     type="button"
