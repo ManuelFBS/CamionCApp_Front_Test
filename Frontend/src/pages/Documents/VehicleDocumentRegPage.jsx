@@ -34,15 +34,18 @@ export function VehicleDocumentRegisterPage() {
                     icon: 'success',
                     confirmButtonText: 'Aceptar',
                 });
+
+                reset();
             }
         } catch (error) {
-            console.log(error);
+            console.log(error.message);
             swal2.fire({
                 title: 'Error inesperado...!',
                 text: `Ha ocurrido un error inesperado: ${error.message}. Si el error persiste, contacte con el Deassarrollador del software...!!!`,
                 icon: 'error',
             });
             setIsLoading(false);
+            reset();
         }
     };
 

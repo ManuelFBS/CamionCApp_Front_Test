@@ -31,12 +31,19 @@ export function NavBarMain() {
 
     return (
         <nav className="bg-red-600 my-2 mr-4 ml-4 mb-0 flex justify-between py-3 px-8 rounded-lg">
-            <div>
-                <Link to={'/dashboard/admin'}>
-                    <h1 className="text-2xl font-bold mr-96">
-                        Dashboard Admin
-                    </h1>
+            <div className="relative group">
+                {/* <Link to={'/dashboard/admin'}> */}
+                <Link to={'/'}>
+                    <img
+                        src="src/assets/YadiraMayac_logoB&W_Size20PrcOrigin.png"
+                        alt="log"
+                        className="h-10 w-auto -m-1.5"
+                    />
                 </Link>
+                {/* Tooltip customizado... */}
+                <span className="absolute z-50 left-1/2 transform -translate-x-1/2 translate-y-6 bg-red-500 text-white text-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    ir a Inicio
+                </span>
             </div>
 
             <div className="w-96 flex justify-between mr-4 font-tahoma font-medium">

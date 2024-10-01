@@ -16,10 +16,11 @@
 body {
     margin: 0;
     padding: 0;
-    background: #ffffff;
+    background-size: 100%;
+    /* background: #ffffff; */
     color: #eeeeee;
     overflow-x: hidden;
-    min-height: 100vh;
+    /* min-height: 100vh; */
 }
 
 /*.bg-homepage,
@@ -41,22 +42,24 @@ body {
   min-height: 100vh;
 } */
 
+.bg-homepage {
+    /* background-image: url('/public/YadiraMayacSAS_logoWhite.png'); */
+    background-image: url('src/assets/Truck_Size1920x1080.png');
+    background-size: 100%;
+}
+
 .bg-otherpages {
     position: relative;
+    background-size: 75%;
 }
 
 .bg-homepage,
 .bg-otherpages {
     min-height: 100vh;
-    background-size: 75%;
     background-position: center;
     background-repeat: no-repeat;
     background-color: #ffffff;
-    overflow-y: auto;
-}
-
-.bg-homepage {
-    background-image: url('/public/YadiraMayacSAS_logoWhite.png');
+    /* overflow-y: hidden; */
 }
 
 .bg-otherpages::before {
@@ -78,4 +81,8 @@ body {
 .bg-otherpages > * {
     position: relative;
     z-index: 1;
+}
+
+.logo-navbar {
+    background-image: url('src/assets/YadiraMayac_logoB&W_Size20PrcOrigin.png');
 }
