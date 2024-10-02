@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import { Loading } from '../../components/Loading/Loading';
 import swal2 from 'sweetalert2';
 import { useAuth } from '../../context/AuthContext';
+import { generateFormControlNumber } from '../../libs/generateNumber';
 
 export function VolquetasFormPage() {
     const {
@@ -20,6 +21,7 @@ export function VolquetasFormPage() {
     const { dni, vehicleRegistrationPlate } = useAuth();
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
+    const [formNumber, setFormNumber] = useState(generateFormControlNumber());
 
     const onSubmit = async (data) => {
         try {
@@ -27,6 +29,7 @@ export function VolquetasFormPage() {
 
             const _data = {
                 ...data,
+                n_planilla: formNumber,
                 cedula: dni,
                 placa_vehiculo: vehicleRegistrationPlate,
             };
@@ -49,6 +52,9 @@ export function VolquetasFormPage() {
                 });
 
                 reset();
+
+                // Regenerar un nuevo número de planilla después de registrar...
+                setFormNumber(generateFormControlNumber());
 
                 setIsLoading(false);
             }
@@ -76,9 +82,9 @@ export function VolquetasFormPage() {
             )}{' '}
             {/* Se renderiza si es true... */}
             <div className="flex h-[calc(100vh-100px)] items-center justify-center -mt-4">
-                <div className="bg-zinc-100 border-4 border-red-600 max-w-3xl w-full p-0 rounded-md">
-                    <div className="bg-red-600 flex justify-items-center">
-                        <h2 className="text-2xl font-bold italic ml-72 mb-2 text-gray-100">
+                <div className="bg-zinc-100 border-2 border-gray-600 max-w-3xl w-full p-0 rounded-md">
+                    <div className="bg-gray-300 border-2 border-transparent border-b-gray-500 flex justify-items-center">
+                        <h2 className="text-2xl font-bold italic pt-1 ml-72 mb-2 text-gray-600">
                             Nueva Planilla
                         </h2>
                     </div>
@@ -91,18 +97,9 @@ export function VolquetasFormPage() {
                         <div className="grid grid-cols-3 gap-3">
                             <div>
                                 <Label htmlFor="n_planilla">Nº Planilla</Label>
-                                <Input
-                                    type="text"
-                                    placeholder="Escriba el nro de la planilla..."
-                                    {...register('n_planilla', {
-                                        required: 'Este campo es obligatorio',
-                                    })}
-                                />
-                                {errors.n_planilla && (
-                                    <p className="text-red-700">
-                                        {errors.n_planilla.message}
-                                    </p>
-                                )}
+                                <p className="border border-gray-300 bg-gray-200 rounded-md p-1.5 mt-1 text-right">
+                                    {formNumber}
+                                </p>
                             </div>
 
                             <div>
