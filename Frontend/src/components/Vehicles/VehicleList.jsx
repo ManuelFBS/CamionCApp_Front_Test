@@ -27,7 +27,7 @@ export function VehiclesList() {
                             navigate('/unauthorized');
                             break;
                         case 404:
-                            setError('No se encontraron empleados...!');
+                            setError('No se encontraron vehículos...!');
                             break;
                         case 500:
                             setError(
@@ -66,6 +66,7 @@ export function VehiclesList() {
                         <th className="px-4 py-2 border-b">Clase</th>
                         <th className="px-4 py-2 border-b">Marca</th>
                         <th className="px-4 py-2 border-b">Color</th>
+                        <th className="px-4 py-2 border-b">Asignado a...</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -75,17 +76,24 @@ export function VehiclesList() {
                             className="border-b-4 cursor-pointer"
                             onClick={() => navigate(`vehicle/${vehicle._id}`)}
                         >
-                            <td className="px-4 py-2 border-b pl-24">
+                            <td className="px-4 py-2 border-b pl-20">
                                 {vehicle.placa}
                             </td>
                             <td className="px-4 py-2 border-b pl-40">
                                 {vehicle.clase_de_vehiculo}
                             </td>
-                            <td className="-px-1 py-2 border-b pl-40">
+                            <td className="-px-1 py-2 border-b pl-24">
                                 {vehicle.marca}
                             </td>
-                            <td className="-px-1 py-2 border-b pl-40">
+                            <td className="-px-1 py-2 border-b pl-36">
                                 {vehicle.color}
+                            </td>
+                            <td
+                                className={`px-0 py-2 border-b pl-12 ${vehicle.persona_cedula !== 0 ? 'text-blue-600 font-bold' : ''}`}
+                            >
+                                {vehicle.persona_cedula === 0
+                                    ? 'Sin asignar...'
+                                    : vehicle.persona_cedula}
                             </td>
                         </tr>
                     ))}
