@@ -5,6 +5,7 @@ import { EmployeeDropdown } from '../Menu/EmployeeDropdown';
 import { UserDropdown } from '../Menu/UserDropdown';
 import { EmployeeFormDropdown } from '../Menu/EmployeesFormDropdown';
 import { VehicleFormDropdown } from '../Menu/VehicleFormDropdown';
+import { InvoicesDropdown } from '../Menu/InvoicesDropdown';
 import { useAuth } from '../../context/AuthContext';
 
 export function NavBarMain() {
@@ -47,7 +48,10 @@ export function NavBarMain() {
             </div>
 
             <div className="w-96 flex justify-between mr-4 font-tahoma font-medium">
-                <Link to={'/login'} className="pt-1 hover:text-yellow-200">
+                <Link
+                    to={'/login'}
+                    className="-ml-20 pt-1 hover:text-yellow-200"
+                >
                     Login
                 </Link>
                 {isAuthorized ? (
@@ -55,6 +59,7 @@ export function NavBarMain() {
                         <EmployeeDropdown />
                         <UserDropdown />
                         <VehicleFormDropdown />
+                        <InvoicesDropdown />
                     </>
                 ) : (
                     <>
@@ -69,13 +74,13 @@ export function NavBarMain() {
                         </Link>
                     </>
                 )}
-                <Link to={'/'} className="pt-1 hover:text-yellow-200">
+                <Link to={'/'} className="ml-4 pt-1 hover:text-yellow-200">
                     Home
                 </Link>
 
                 <button
                     onClick={handleLogout}
-                    className="bg-transparent  hover:text-yellow-200"
+                    className="ml-4 pt-0.5 bg-transparent  hover:text-yellow-200"
                 >
                     Logout
                 </button>

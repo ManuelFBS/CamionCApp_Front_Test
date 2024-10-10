@@ -30,12 +30,12 @@ export const VehicleFormDropdown = () => {
     }, []);
 
     return (
-        <div className="relative" ref={menuRef}>
+        <div className="ml-4" ref={menuRef}>
             <button onClick={toggleMenu} className="pt-1 hover:text-yellow-200">
                 Vehículos
             </button>
             {isOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
+                <div className="absolute right-42 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
                     {isAuthenticated ? (
                         <>
                             <Link

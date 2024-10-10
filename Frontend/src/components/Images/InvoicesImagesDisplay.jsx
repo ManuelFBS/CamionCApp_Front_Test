@@ -1,7 +1,7 @@
 /* eslint-disable no-empty */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
-import { getImageRefuelingByIDRequest } from '../../../api/images';
+import { getImageRefuelingByIDRequest } from '../../../api/invoices';
 
 export function ImageDisplay() {
     const [imageSrc, setImageSrc] = useState(null);

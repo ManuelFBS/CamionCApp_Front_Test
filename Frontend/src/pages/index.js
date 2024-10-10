@@ -20,5 +20,7 @@ export { VehicleFormAddPage } from './Vehicles/VehicleFormAddPage';
 export { AssignDriverToVehicleFormPage } from './Vehicles/AssignDriverToVehicleForm';
 // Documentos...
 export { VehicleDocumentRegisterPage } from './Documents/VehicleDocumentRegPage';
+// Recibos...
+export { InvoiceSearchFormPage } from './Invoices/InvoiceSearchFormPage';
 
 export { UnauthorizedPage } from './UnauthorizedPage/UnauthorizedPage';
