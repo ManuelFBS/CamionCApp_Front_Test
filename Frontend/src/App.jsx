@@ -23,6 +23,7 @@ import {
     InvoiceSearchFormPage,
 } from './pages';
 import { EmployeesDetailsCard } from './components/Employees/EmployeesDetailsCard';
+import { InvoiceRefuelingImageView } from './components/Images/InvoiceRefuelingImageView';
 import { NavBarMain } from './components/Navs/NavBarMain';
 import { AuthProvider } from './context/AuthContext';
 import { ProtectedRoute } from './pages/ProtectedRoutes/ProtectedRoutes';
@@ -158,6 +159,15 @@ function App() {
                             element={
                                 <ProtectedRoute allowed={['Admin', 'Owner']}>
                                     <InvoiceSearchFormPage />
+                                </ProtectedRoute>
+                            }
+                        />
+
+                        <Route
+                            path="/imgrefueling-view"
+                            element={
+                                <ProtectedRoute allowed={['Admin', 'Owner']}>
+                                    <InvoiceRefuelingImageView />
                                 </ProtectedRoute>
                             }
                         />

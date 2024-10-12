@@ -1,38 +1,44 @@
 /* eslint-disable no-empty */
 /* eslint-disable no-unused-vars */
 import { Button, Input, Label } from '../../components/UI';
-import { useState } from 'react';
-import { getEmployeeByDniRequest } from '../../../api/employees';
-import { getImageRefuelingByIDRequest } from '../../../api/invoices';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { getImageRefuelingByDNIAndInvoiceRequest } from '../../../api/invoices';
 import { Loading } from '../../components/Loading/Loading';
 
 export function InvoiceSearchFormPage() {
     const [cedula, setCedula] = useState('');
-    const [employee, setEmployee] = useState(null);
+    const [invoice, setInvoice] = useState(null);
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState('');
 
-    const handleInputChange = (e) => {
-        setCedula(e.target.value);
-    };
+    const navigate = useNavigate();
 
-    const handleSearch = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        setLoading(true);
-        setError(null);
-        setEmployee(null);
-
         try {
-            const response = await getEmployeeByDniRequest(cedula);
+            setLoading(true);
+            setError('');
 
-            setEmployee(response.data);
-            setLoading(false);
+            const response = await getImageRefuelingByDNIAndInvoiceRequest(
+                cedula,
+                invoice,
+            );
 
-            console.log(response.data.tanqueos);
+            // Se convierte el blob en un URL para mostrar la imagen...
+            const imageBlob = new Blob([response.data], {
+                type: response.headers['Content-Type'],
+            });
+            const imageUrl = URL.createObjectURL(imageBlob);
+
+            // Se navega a la vista de la imagen, pasando la URL de la imagen...
+            navigate('/imgrefueling-view', { state: { imageUrl } });
         } catch (error) {
             setLoading(false);
-            setError('Empleado no encontrado...!!!');
+            setError(
+                'No se pudo obtener la imagen, verifique la cédula y el recibo.',
+            );
         } finally {
             setLoading(false);
         }
@@ -51,28 +57,47 @@ export function InvoiceSearchFormPage() {
                         <h2 className="customH2 ml-16">Buscar Recibo...</h2>
                     </div>
 
-                    <form className="customFormDiv">
+                    <form onSubmit={handleSubmit} className="customFormDiv">
                         <div>
                             <div>
                                 <Label htmlFor="cedula">Cédula</Label>
                                 <Input
+                                    id="cedula"
                                     type="number"
                                     value={cedula}
-                                    onChange={handleInputChange}
+                                    onChange={(e) => setCedula(e.target.value)}
                                     placeholder="Ingrese el nro de cédula..."
+                                    required
+                                />
+                            </div>
+
+                            <div>
+                                <Label htmlFor="invoice">Nº Recibo</Label>
+                                <Input
+                                    id="invoice"
+                                    type="text"
+                                    value={invoice}
+                                    onChange={(e) => setInvoice(e.target.value)}
+                                    placeholder="Ingrese el nro de recibo..."
+                                    required
                                 />
                             </div>
                         </div>
 
                         <div className="flex justify-end">
                             <Button
-                                onClick={handleSearch}
+                                type="submit"
                                 className="bg-slate-500 w-1/3 mt-3 mb-4 hover:bg-slate-400"
                             >
-                                Aceptar
+                                Buscar Recibo
                             </Button>
                         </div>
                     </form>
+
+                    {/* Mostrar error si ocurre */}
+                    {error && (
+                        <p className="text-red-500 text-center">{error}</p>
+                    )}
                 </div>
             </div>
         </div>

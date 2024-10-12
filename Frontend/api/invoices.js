@@ -1,5 +1,7 @@
 /* eslint-disable no-unused-vars */
 import axios from './axios';
 
-export const getImageRefuelingByIDRequest = (refuelingID) =>
-    axios.get(`images/image/${refuelingID}`);
+export const getImageRefuelingByDNIAndInvoiceRequest = (cedula, recibo) =>
+    axios.get(`images/image/${cedula}/${recibo}`, {
+        responseType: 'blob', // Esto asegura que se reciba la imagen como un archivo binario...
+    });
