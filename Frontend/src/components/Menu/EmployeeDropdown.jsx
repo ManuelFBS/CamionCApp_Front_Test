@@ -32,7 +32,7 @@ export const EmployeeDropdown = () => {
     return (
         <div className="ml-4" ref={menuRef}>
             <button onClick={toggleMenu} className="pt-1 hover:text-yellow-200">
-                Personal
+                Empleados
             </button>
             {isOpen && (
                 <div className="absolute right-68 mt-2 w-48 bg-red-600 rounded-md shadow-lg z-10">
@@ -57,28 +57,21 @@ export const EmployeeDropdown = () => {
                             </Link>
 
                             <Link
-                                to={'/employees/bydni'}
-                                onClick={() => setIsOpen(false)}
-                                className="customSubMenu"
-                            >
-                                Buscar por cédula...
-                            </Link>
-
-                            <hr className="bg-red-400 border-red-400 h-0.5 mt-2 mb-1" />
-
-                            <Link
                                 to={'/employees/employee/edit'}
                                 onClick={() => setIsOpen(false)}
                                 className="customSubMenu"
                             >
                                 Actualizar Empleado...
                             </Link>
+
+                            <hr className="bg-red-400 border-red-400 h-0.5 mt-2 mb-1" />
+
                             <Link
-                                to={'/employees/employee/del'}
+                                to={'/employees/bydni'}
                                 onClick={() => setIsOpen(false)}
                                 className="customSubMenu"
                             >
-                                Eliminar Empleado...
+                                Buscar por cédula...
                             </Link>
                         </>
                     ) : (

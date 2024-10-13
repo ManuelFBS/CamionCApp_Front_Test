@@ -52,7 +52,7 @@ export function NavBarMain() {
                     to={'/login'}
                     className="-ml-20 pt-1 hover:text-yellow-200"
                 >
-                    Login
+                    Ingresar
                 </Link>
                 {isAuthorized ? (
                     <>
@@ -75,14 +75,14 @@ export function NavBarMain() {
                     </>
                 )}
                 <Link to={'/'} className="ml-4 pt-1 hover:text-yellow-200">
-                    Home
+                    Inicio
                 </Link>
 
                 <button
                     onClick={handleLogout}
                     className="ml-4 pt-0.5 bg-transparent  hover:text-yellow-200"
                 >
-                    Logout
+                    Salir
                 </button>
             </div>
         </nav>
