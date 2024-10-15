@@ -4,9 +4,11 @@ export { EmployeesPage } from './Employees/EmployeesPage';
 export { EmployeesFormAddPage } from './Employees/EmployeesFormAddPage';
 export { EmployeeByDniPage } from './Employees/EmployeesByDniPage';
 export { UpdateEmployeeByDni } from './Employees/UpdateEmployeeFormByDniPage';
+// Usuarios...
 export { UsersFormAddPage } from './Users/UsersFormAddPage';
 export { UsersFormLockUnlockPage } from './Users/UsersFormLockUnlockPage';
 export { UsersPage } from './Users/UsersPage';
+export { UsersSearchPage } from './Users/UsersSearchPage';
 // Volquetas...
 export { GeneralAccessPage } from './GeneralAccess/GeneralAccessPage';
 export { VolquetasFormPage } from './VolquetasForm/VolquetasFormPage';

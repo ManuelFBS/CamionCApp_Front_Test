@@ -49,8 +49,6 @@ export function EmployeesDetailsCard({ employee: initialEmployee }) {
         const year = date.getFullYear();
 
         return `${day}-${month}-${year}`;
-
-        // return new Date(dateString).toISOString().split('T')[0];
     };
 
     if (loading) {

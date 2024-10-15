@@ -11,6 +11,7 @@ import {
     UsersFormAddPage,
     UsersFormLockUnlockPage,
     UsersPage,
+    UsersSearchPage,
     GeneralAccessPage,
     VolquetasFormPage,
     RefuelingFormPage,
@@ -102,6 +103,16 @@ function App() {
                                 </ProtectedRoute>
                             }
                         />
+
+                        <Route
+                            path="/users/user/byuser"
+                            element={
+                                <ProtectedRoute allowed={['Admin', 'Owner']}>
+                                    <UsersSearchPage />
+                                </ProtectedRoute>
+                            }
+                        />
+
                         <Route
                             path="/users/admin/lock-unlock"
                             element={

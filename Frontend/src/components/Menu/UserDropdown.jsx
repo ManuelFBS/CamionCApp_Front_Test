@@ -38,40 +38,47 @@ export const UserDropdown = () => {
                     {isAuthenticated ? (
                         <>
                             <Link
-                                to={'/users/add'}
-                                onClick={() => setIsOpen(false)}
-                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                            >
-                                Nuevo Usuario...
-                            </Link>
-                            <Link
                                 to={'/users'}
                                 onClick={() => setIsOpen(false)}
                                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                             >
                                 Todos los ...
                             </Link>
+
+                            <hr className="bg-slate-300 h-0.5" />
+
                             <Link
-                                // to={'/employees/search'}
+                                to={'/users/add'}
+                                onClick={() => setIsOpen(false)}
+                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                            >
+                                Nuevo Usuario...
+                            </Link>
+
+                            <Link
+                                to={'/users/user/byuser'}
                                 onClick={() => setIsOpen(false)}
                                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                             >
                                 Buscar Usuario...
                             </Link>
-                            <Link
+                            {/* <Link
                                 // to={'/employees/search'}
                                 onClick={() => setIsOpen(false)}
                                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                             >
                                 Actualizar...
-                            </Link>
+                            </Link> */}
+
+                            <hr className="bg-slate-300 h-0.5" />
+
                             <Link
-                                // to={'/employees/search'}
                                 onClick={() => setIsOpen(false)}
                                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                             >
                                 Bloquear Usuario...
                             </Link>
+
                             <Link
                                 to={'/users/admin/lock-unlock'}
                                 onClick={() => setIsOpen(false)}
@@ -79,8 +86,10 @@ export const UserDropdown = () => {
                             >
                                 Desbloquar Usuario...
                             </Link>
+
+                            <hr className="bg-slate-300 h-0.5" />
+
                             <Link
-                                // to={'/employees/search'}
                                 onClick={() => setIsOpen(false)}
                                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                             >
