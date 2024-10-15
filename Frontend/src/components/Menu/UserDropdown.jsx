@@ -73,6 +73,7 @@ export const UserDropdown = () => {
                             <hr className="bg-slate-300 h-0.5" />
 
                             <Link
+                                to={'/users/admin/disable-user'}
                                 onClick={() => setIsOpen(false)}
                                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                             >
@@ -80,20 +81,11 @@ export const UserDropdown = () => {
                             </Link>
 
                             <Link
-                                to={'/users/admin/lock-unlock'}
+                                to={'/users/admin/unlock-user'}
                                 onClick={() => setIsOpen(false)}
                                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                             >
-                                Desbloquar Usuario...
-                            </Link>
-
-                            <hr className="bg-slate-300 h-0.5" />
-
-                            <Link
-                                onClick={() => setIsOpen(false)}
-                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                            >
-                                Eliminar...
+                                Desbloquear Usuario...
                             </Link>
                         </>
                     ) : (

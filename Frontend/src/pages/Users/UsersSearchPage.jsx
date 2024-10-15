@@ -2,11 +2,11 @@
 /* eslint-disable no-unused-vars */
 import { Button, Input, Label } from '../../components/UI';
 import { useState } from 'react';
-import { getUserRequest } from '../../../api/users';
+import { getUserRequest, deleteUserRequest } from '../../../api/users';
+import { UsersDetailsCard } from '../../components/Users/UserDetailsCard';
 import { Loading } from '../../components/Loading/Loading';
 import Swal from 'sweetalert2';
 import '../../styles/global.css';
-import { UsersDetailsCard } from '../../components/Users/UserDetailsCard';
 
 export function UsersSearchPage() {
     const [user, setUser] = useState('');
@@ -36,9 +36,57 @@ export function UsersSearchPage() {
         } finally {
             setLoading(false);
         }
-
-        // const handleDeleteUser = async (e) => {};
     };
+
+    // Para eliminar el usuario...
+    const handleDeleteUser = async (e) => {
+        e.preventDefault();
+
+        // Confirmación de la eliminación por medio de un sweetalert...
+        const result = await Swal.fire({
+            title: '¿Está seguro...?',
+            text: 'Esta acción eliminará el usuario e impedirá que el empleado asociado pueda iniciar sesión. ¡No se puede revertir...!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, eliminar...',
+            cancelButtonText: 'No, cancelar...',
+            reverseButtons: true,
+        });
+
+        if (result.isConfirmed) {
+            try {
+                // console.log('id: ', employeeUser._id);
+                await deleteUserRequest(employeeUser._id);
+
+                Swal.fire({
+                    title: 'Eliminado',
+                    text: 'El usuario ha sido eliminado exitosamente.',
+                    icon: 'success',
+                    confirmButtonText: 'OK',
+                });
+
+                // Se resetea el formulario y limpiar los estados...
+                setUser('');
+                setEmployeeUser(null);
+                setError(null);
+            } catch (error) {
+                console.error(error.message);
+                // Mostrar mensaje de error
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Hubo un problema al eliminar al usuario.',
+                    icon: 'error',
+                    confirmButtonText: 'OK',
+                });
+            }
+        } else {
+            // Resetear el formulario si el usuario cancela...
+            setUser('');
+            setEmployeeUser(null);
+            setError(null);
+        }
+    };
+
     return (
         <div className="bg-otherpages min-h-screen">
             {loading && (
@@ -74,7 +122,7 @@ export function UsersSearchPage() {
                                 {employeeUser && (
                                     <div className="flex justify-center mt-4">
                                         <Button
-                                            // onClick={handleDelete}
+                                            onClick={handleDeleteUser}
                                             className="bg-red-600 w-40 mb-4 hover:bg-red-400"
                                         >
                                             Eliminar Usuario

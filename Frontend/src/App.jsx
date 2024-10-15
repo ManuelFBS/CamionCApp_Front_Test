@@ -9,7 +9,8 @@ import {
     HomePage,
     LoginPage,
     UsersFormAddPage,
-    UsersFormLockUnlockPage,
+    UsersFormDisablePage,
+    UsersFormUnlockPage,
     UsersPage,
     UsersSearchPage,
     GeneralAccessPage,
@@ -114,10 +115,19 @@ function App() {
                         />
 
                         <Route
-                            path="/users/admin/lock-unlock"
+                            path="/users/admin/disable-user"
                             element={
                                 <ProtectedRoute allowed={['Admin', 'Owner']}>
-                                    <UsersFormLockUnlockPage />
+                                    <UsersFormDisablePage />
+                                </ProtectedRoute>
+                            }
+                        />
+
+                        <Route
+                            path="/users/admin/unlock-user"
+                            element={
+                                <ProtectedRoute allowed={['Admin', 'Owner']}>
+                                    <UsersFormUnlockPage />
                                 </ProtectedRoute>
                             }
                         />

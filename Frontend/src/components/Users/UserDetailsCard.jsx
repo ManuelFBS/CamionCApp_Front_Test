@@ -2,65 +2,29 @@
 /* eslint-disable no-empty */
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from 'react';
-import { useNavigate, useLocation, useParams } from 'react-router-dom';
-import { getUserRequest } from '../../../api/users';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { getEmployeeByDniRequest } from '../../../api/employees';
 
 export function UsersDetailsCard({ employeeUser }) {
     const [employee, setEmployee] = useState(null);
-    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const location = useLocation();
-    // const { user } = useParams();
 
     useEffect(() => {
-        // console.log(employeeUser);
-        // console.log('Este es el DNI: ', employeeUser.usuario_cedula);
-        // const searchEmployeeUser = async () => {
-        //     if (!user) {
-        //         setLoading(false);
-        //         return;
-        //     }
-
-        //     try {
-        //         const response = await getUserRequest(user);
-        //         const responseEmployee = await getEmployeeByDniRequest(
-        //             user.usuario_cedula,
-        //         );
-
-        //         setEmployeeUser(response.data);
-        //         setEmployee(
-        //             responseEmployee.data.nombres +
-        //                 ' ' +
-        //                 responseEmployee.apellidos,
-        //         );
-        //     } catch (error) {
-        //         console.error('Error fetching employee user by user:', error);
-        //     } finally {
-        //         setLoading(false);
-        //     }
-        // };
-
-        // if (!initialEmployeeUser) {
-        //     searchEmployeeUser();
-        // } else {
-        //     setLoading(false);
-        // }
         if (employeeUser) {
-            // const searchEmployeeUser = async () => {
-            //     const responseDataEmployee = await getEmployeeByDniRequest(
-            //         employeeUser.usuario_cedula,
-            //     );
+            const searchEmployeeUser = async () => {
+                const responseDataEmployee = await getEmployeeByDniRequest(
+                    employeeUser.usuario_cedula,
+                );
 
-            //     console.log(responseDataEmployee.data);
-            // };
+                setEmployee([
+                    responseDataEmployee.data.nombres,
+                    ' ',
+                    responseDataEmployee.data.apellidos,
+                ]);
+            };
 
-            // Se concatenan los nombres y apellidos del usuario si existen...
-            setEmployee(
-                employeeUser.nombres && employeeUser.apellidos
-                    ? `${employeeUser.nombres} ${employeeUser.apellidos}`
-                    : 'N/A',
-            );
+            searchEmployeeUser();
         }
     }, [employeeUser]);
 
@@ -74,10 +38,6 @@ export function UsersDetailsCard({ employeeUser }) {
 
     if (!employeeUser) {
         return <p>No se encontraron detalles del usuario.</p>;
-    }
-
-    if (loading) {
-        return <p>Loading...</p>;
     }
 
     return (
