@@ -51,3 +51,9 @@
 .customSubMenu {
     @apply block px-4 py-2 text-sm text-gray-200 hover:text-yellow-300;
 }
+
+/* Para los Input's... */
+input[type='date'],
+input[type='datetime-local'] {
+    color: #1e293b; /* text-slate-800 */
+}

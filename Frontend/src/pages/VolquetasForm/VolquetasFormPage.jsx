@@ -3,13 +3,16 @@
 /* eslint-disable no-unused-vars */
 import { Button, Input, Label } from '../../components/UI';
 import { useForm } from 'react-hook-form';
-import { createNewVolquetaForm } from '../../../api/volquetas';
+import {
+    createNewVolquetaForm,
+    genContRandNumberRequest,
+} from '../../../api/volquetas';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Loading } from '../../components/Loading/Loading';
 import swal2 from 'sweetalert2';
 import { useAuth } from '../../context/AuthContext';
-import { generateFormControlNumber } from '../../libs/generateNumber';
+// import { generateFormControlNumber } from '../../libs/generateNumber';
 
 export function VolquetasFormPage() {
     const {
@@ -21,7 +24,23 @@ export function VolquetasFormPage() {
     const { dni, vehicleRegistrationPlate } = useAuth();
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
-    const [formNumber, setFormNumber] = useState(generateFormControlNumber());
+    const [formNumber, setFormNumber] = useState('Cargando...');
+
+    const fetchFormNumber = async () => {
+        try {
+            const { data } = await genContRandNumberRequest();
+            const { numbOfForm } = data;
+
+            setFormNumber(numbOfForm);
+        } catch (error) {
+            console.error('Error al generar el número de planilla:', error);
+            setFormNumber('Error al generar número');
+        }
+    };
+
+    useEffect(() => {
+        fetchFormNumber();
+    }, []);
 
     const onSubmit = async (data) => {
         try {
@@ -55,7 +74,7 @@ export function VolquetasFormPage() {
 
                 // Regenerar un nuevo número de planilla después de registrar...
                 setFormNumber(generateFormControlNumber());
-
+                fetchFormNumber();
                 setIsLoading(false);
             }
         } catch (error) {
@@ -97,7 +116,7 @@ export function VolquetasFormPage() {
                         <div className="grid grid-cols-3 gap-3">
                             <div>
                                 <Label htmlFor="n_planilla">Nº Planilla</Label>
-                                <p className="border border-gray-300 bg-gray-200 rounded-md p-1.5 mt-1 text-right">
+                                <p className="border border-gray-300 bg-gray-200 rounded-md p-1.5 mt-1 text-blue-700 text-right">
                                     {formNumber}
                                 </p>
                             </div>
@@ -119,7 +138,7 @@ export function VolquetasFormPage() {
 
                             <div>
                                 <Label htmlFor="cedula">Cédula Conductor</Label>
-                                <p className="border border-gray-300 bg-gray-200 rounded-md p-1.5 mt-1">
+                                <p className="border border-gray-300 bg-gray-200 rounded-md p-1.5 mt-1 text-blue-700 text-right">
                                     {dni || 'Cargando...'}
                                 </p>
                             </div>
@@ -129,7 +148,7 @@ export function VolquetasFormPage() {
                         <div className="grid grid-cols-3 gap-3">
                             <div>
                                 <Label htmlFor="placa_vehiculo">Placa</Label>
-                                <p className="border border-gray-300 bg-gray-200 rounded-md p-1.5 mt-1.5 mb-3">
+                                <p className="border border-gray-300 bg-gray-200 rounded-md p-1.5 mt-1.5 mb-3 text-blue-700 text-right">
                                     {vehicleRegistrationPlate || 'Cargando...'}
                                 </p>
                             </div>

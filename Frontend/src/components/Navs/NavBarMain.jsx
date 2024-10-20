@@ -69,9 +69,10 @@ export function NavBarMain() {
                         >
                             No Permitido...
                         </Link>
-                        <Link className="pt-0 hover:text-yellow-300">
+                        {/* <Link className="pt-0 hover:text-yellow-300">
                             <EmployeeFormDropdown />
-                        </Link>
+                        </Link> */}
+                        <EmployeeFormDropdown />
                     </>
                 )}
                 <Link to={'/'} className="ml-4 pt-1 hover:text-yellow-200">
