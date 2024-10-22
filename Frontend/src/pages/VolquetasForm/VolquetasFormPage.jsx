@@ -72,8 +72,10 @@ export function VolquetasFormPage() {
 
                 reset();
 
+                setFormNumber('Cargando...');
+
                 // Regenerar un nuevo número de planilla después de registrar...
-                setFormNumber(generateFormControlNumber());
+                // setFormNumber(generateFormControlNumber());
                 fetchFormNumber();
                 setIsLoading(false);
             }

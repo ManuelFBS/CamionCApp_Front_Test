@@ -8,7 +8,7 @@ import { Loading } from '../../components/Loading/Loading';
 
 export function InvoiceSearchFormPage() {
     const [cedula, setCedula] = useState('');
-    const [invoice, setInvoice] = useState(null);
+    const [invoice, setInvoice] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
@@ -25,6 +25,8 @@ export function InvoiceSearchFormPage() {
                 cedula,
                 invoice,
             );
+
+            console.log(response.data);
 
             // Se convierte el blob en un URL para mostrar la imagen...
             const imageBlob = new Blob([response.data], {
