@@ -8,7 +8,7 @@ import '../../styles/global.css';
 export const InvoicesDropdown = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
-    const { isAuthenticated } = useAuth();
+    const { isAuthenticated, setInvoiceType } = useAuth();
     const menuRef = useRef(null);
     const subMenuRef = useRef(null);
 
@@ -91,10 +91,11 @@ export const InvoicesDropdown = () => {
                                         className="absolute right-full top-0 mt-0 mr-0 w-48 bg-red-500 rounded-md shadow-lg z-10"
                                     >
                                         <Link
-                                            to={'/search/heavyload'}
+                                            to={'/search/invoice-type'}
                                             onClick={() => {
                                                 setIsOpen(false);
                                                 setIsSubMenuOpen(false);
+                                                setInvoiceType('heavyload');
                                             }}
                                             className="customSubMenu block px-4 py-2 text-white hover:bg-red-400"
                                         >
@@ -102,10 +103,11 @@ export const InvoicesDropdown = () => {
                                         </Link>
 
                                         <Link
-                                            to={'/search/volq'}
+                                            to={'/search/invoice-type'}
                                             onClick={() => {
                                                 setIsOpen(false);
                                                 setIsSubMenuOpen(false);
+                                                setInvoiceType('volqueta');
                                             }}
                                             className="customSubMenu block px-4 py-2 text-white hover:bg-red-400"
                                         >
@@ -113,10 +115,11 @@ export const InvoicesDropdown = () => {
                                         </Link>
 
                                         <Link
-                                            to={'/search/refueling'}
+                                            to={'/search/invoice-type'}
                                             onClick={() => {
                                                 setIsOpen(false);
                                                 setIsSubMenuOpen(false);
+                                                setInvoiceType('refueling');
                                             }}
                                             className="customSubMenu block px-4 py-2 text-white hover:bg-red-400"
                                         >

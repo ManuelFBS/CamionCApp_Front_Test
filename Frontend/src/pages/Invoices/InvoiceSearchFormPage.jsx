@@ -3,16 +3,47 @@
 import { Button, Input, Label } from '../../components/UI';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getImageRefuelingByDNIAndInvoiceRequest } from '../../../api/invoices';
+import {
+    getImageHeavyLoadByDNIAndInvoiceRequest,
+    getImageVolquetaByDNIAndInvoiceRequest,
+    getImageRefuelingByDNIAndInvoiceRequest,
+} from '../../../api/invoices';
 import { Loading } from '../../components/Loading/Loading';
+import { useAuth } from '../../context/AuthContext';
 
 export function InvoiceSearchFormPage() {
     const [cedula, setCedula] = useState('');
     const [invoice, setInvoice] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const { invoiceType } = useAuth();
 
     const navigate = useNavigate();
+
+    const getInvoiceTitle = () => {
+        switch (invoiceType) {
+            case 'heavyload':
+                return 'Buscar Recibo Carga Pesada';
+            case 'volqueta':
+                return 'Buscar Recibo Volqueta';
+            case 'refueling':
+                return 'Buscar Recibo Tanqueo';
+            default:
+                return 'Buscar Recibo...';
+        }
+    };
+
+    const invoiceTypeHandlers = {
+        heavyload: getImageHeavyLoadByDNIAndInvoiceRequest,
+        volqueta: getImageVolquetaByDNIAndInvoiceRequest,
+        refueling: getImageRefuelingByDNIAndInvoiceRequest,
+    };
+
+    const invoiceTypeURL = {
+        heavyload: '/imgheavyload-view',
+        volqueta: '/imgvolqueta-view',
+        refueling: '/imgrefueling-view',
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -21,12 +52,21 @@ export function InvoiceSearchFormPage() {
             setLoading(true);
             setError('');
 
-            const response = await getImageRefuelingByDNIAndInvoiceRequest(
-                cedula,
-                invoice,
-            );
+            // const response = await getImageRefuelingByDNIAndInvoiceRequest(
+            //     cedula,
+            //     invoice,
+            // );
 
-            console.log(response.data);
+            let response;
+            const handler = invoiceTypeHandlers[invoiceType];
+
+            if (handler) {
+                response = await handler(cedula, invoice);
+            }
+
+            console.log('datos de la imagen: ', response.data);
+
+            const handlreURL = invoiceTypeURL[invoiceType];
 
             // Se convierte el blob en un URL para mostrar la imagen...
             const imageBlob = new Blob([response.data], {
@@ -35,7 +75,8 @@ export function InvoiceSearchFormPage() {
             const imageUrl = URL.createObjectURL(imageBlob);
 
             // Se navega a la vista de la imagen, pasando la URL de la imagen...
-            navigate('/imgrefueling-view', { state: { imageUrl } });
+            // navigate('/imgrefueling-view', { state: { imageUrl } });
+            navigate(handlreURL, { state: { imageUrl } });
         } catch (error) {
             setLoading(false);
             setError(
@@ -56,7 +97,7 @@ export function InvoiceSearchFormPage() {
             <div className="customDiv-1a">
                 <div className="customDiv-2">
                     <div className="customDivH2">
-                        <h2 className="customH2 ml-16">Buscar Recibo...</h2>
+                        <h2 className="customH2 ml-16">{getInvoiceTitle()}</h2>
                     </div>
 
                     <form onSubmit={handleSubmit} className="customFormDiv">

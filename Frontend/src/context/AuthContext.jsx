@@ -15,10 +15,12 @@ export const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const [userRole, setUserRole] = useState(null);
     const [userName, setUserName] = useState(null);
-
+    //
     const [dni, setDNI] = useState(null);
     const [vehicleRegistrationPlate, setVehicleRegistrationPlate] =
         useState(null);
+    //
+    const [invoiceType, setInvoiceType] = useState(null);
 
     useEffect(() => {
         const checkAuth = async () => {
@@ -35,6 +37,7 @@ export const AuthProvider = ({ children }) => {
                 setUserName(null);
                 setDNI(null);
                 setVehicleRegistrationPlate(null);
+                setInvoiceType(null);
             } finally {
                 setLoading(false);
             }
@@ -68,6 +71,8 @@ export const AuthProvider = ({ children }) => {
                 setDNI,
                 vehicleRegistrationPlate,
                 setVehicleRegistrationPlate,
+                invoiceType,
+                setInvoiceType,
             }}
         >
             {children}

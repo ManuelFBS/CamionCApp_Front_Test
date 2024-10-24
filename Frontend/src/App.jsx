@@ -25,7 +25,7 @@ import {
     InvoiceSearchFormPage,
 } from './pages';
 import { EmployeesDetailsCard } from './components/Employees/EmployeesDetailsCard';
-import { InvoiceRefuelingImageView } from './components/Images/InvoiceRefuelingImageView';
+import { InvoiceImageView } from './components/Images/InvoiceImageView';
 import { NavBarMain } from './components/Navs/NavBarMain';
 import { AuthProvider } from './context/AuthContext';
 import { ProtectedRoute } from './pages/ProtectedRoutes/ProtectedRoutes';
@@ -39,7 +39,6 @@ function App() {
                     <Routes>
                         <Route path="/" element={<HomePage />} />
                         <Route path="/login" element={<LoginPage />} />
-
                         <Route
                             path="/employees"
                             element={
@@ -104,7 +103,6 @@ function App() {
                                 </ProtectedRoute>
                             }
                         />
-
                         <Route
                             path="/users/user/byuser"
                             element={
@@ -113,7 +111,6 @@ function App() {
                                 </ProtectedRoute>
                             }
                         />
-
                         <Route
                             path="/users/admin/disable-user"
                             element={
@@ -122,7 +119,6 @@ function App() {
                                 </ProtectedRoute>
                             }
                         />
-
                         <Route
                             path="/users/admin/unlock-user"
                             element={
@@ -131,7 +127,6 @@ function App() {
                                 </ProtectedRoute>
                             }
                         />
-
                         <Route
                             path="/vehicles"
                             element={
@@ -156,7 +151,6 @@ function App() {
                                 </ProtectedRoute>
                             }
                         />
-
                         <Route
                             path="/driverlicenses/add"
                             element={
@@ -165,7 +159,6 @@ function App() {
                                 </ProtectedRoute>
                             }
                         />
-
                         <Route
                             path="/documents/add"
                             element={
@@ -174,25 +167,42 @@ function App() {
                                 </ProtectedRoute>
                             }
                         />
-
                         <Route
-                            path="/search/refueling"
+                            path="/search/invoice-type"
                             element={
                                 <ProtectedRoute allowed={['Admin', 'Owner']}>
                                     <InvoiceSearchFormPage />
                                 </ProtectedRoute>
                             }
                         />
-
+                        {/* /* -------------------------------------------------------------------------------- */}
+                        / * Aquí, las rutas para las imágenes de los recibos...
+                        */
+                        <Route
+                            path="/imgheavyload-view"
+                            element={
+                                <ProtectedRoute allowed={['Admin', 'Owner']}>
+                                    <InvoiceImageView />
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route
+                            path="/imgvolqueta-view"
+                            element={
+                                <ProtectedRoute allowed={['Admin', 'Owner']}>
+                                    <InvoiceImageView />
+                                </ProtectedRoute>
+                            }
+                        />
                         <Route
                             path="/imgrefueling-view"
                             element={
                                 <ProtectedRoute allowed={['Admin', 'Owner']}>
-                                    <InvoiceRefuelingImageView />
+                                    <InvoiceImageView />
                                 </ProtectedRoute>
                             }
                         />
-
+                        {/* -------------------------------------------------------------------------------- */}
                         <Route
                             path="/general_access"
                             element={<GeneralAccessPage />}
@@ -207,7 +217,6 @@ function App() {
                                 </ProtectedRoute>
                             }
                         />
-
                         <Route
                             path="/refueling/planilla/add"
                             element={
@@ -218,7 +227,6 @@ function App() {
                                 </ProtectedRoute>
                             }
                         />
-
                         <Route
                             path="/unauthorized"
                             element={<UnauthorizedPage />}
