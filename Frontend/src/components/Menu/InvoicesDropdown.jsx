@@ -8,7 +8,7 @@ import '../../styles/global.css';
 export const InvoicesDropdown = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
-    const { isAuthenticated, setInvoiceType } = useAuth();
+    const { isAuthenticated, invoiceType, setInvoiceType } = useAuth();
     const menuRef = useRef(null);
     const subMenuRef = useRef(null);
 
@@ -36,6 +36,24 @@ export const InvoicesDropdown = () => {
             document.removeEventListener('click', handleClickOutside);
         };
     }, []);
+
+    const subMenuOptions = [
+        {
+            to: '/search/invoice-type',
+            label: 'Carga Pesada',
+            invoiceType: 'heavyload',
+        },
+        {
+            to: '/search/invoice-type',
+            label: 'Volquetas',
+            invoiceType: 'volqueta',
+        },
+        {
+            to: '/search/invoice-type',
+            label: 'Tanqueos',
+            invoiceType: 'refueling',
+        },
+    ];
 
     return (
         <div className="ml-4" ref={menuRef}>
@@ -90,51 +108,25 @@ export const InvoicesDropdown = () => {
                                         ref={subMenuRef}
                                         className="absolute right-full top-0 mt-0 mr-0 w-48 bg-red-500 rounded-md shadow-lg z-10"
                                     >
-                                        <Link
-                                            to={'/search/invoice-type'}
-                                            onClick={() => {
-                                                setIsOpen(false);
-                                                setIsSubMenuOpen(false);
-                                                setInvoiceType('heavyload');
-                                            }}
-                                            className="customSubMenu block px-4 py-2 text-white hover:bg-red-400"
-                                        >
-                                            Carga Pesada
-                                        </Link>
-
-                                        <Link
-                                            to={'/search/invoice-type'}
-                                            onClick={() => {
-                                                setIsOpen(false);
-                                                setIsSubMenuOpen(false);
-                                                setInvoiceType('volqueta');
-                                            }}
-                                            className="customSubMenu block px-4 py-2 text-white hover:bg-red-400"
-                                        >
-                                            Volquetas
-                                        </Link>
-
-                                        <Link
-                                            to={'/search/invoice-type'}
-                                            onClick={() => {
-                                                setIsOpen(false);
-                                                setIsSubMenuOpen(false);
-                                                setInvoiceType('refueling');
-                                            }}
-                                            className="customSubMenu block px-4 py-2 text-white hover:bg-red-400"
-                                        >
-                                            Tanqueos
-                                        </Link>
+                                        {subMenuOptions.map((option, index) => (
+                                            <Link
+                                                key={index}
+                                                to={option.to}
+                                                onClick={() => {
+                                                    setIsOpen(false);
+                                                    setIsSubMenuOpen(false);
+                                                    setInvoiceType(
+                                                        option.invoiceType,
+                                                    );
+                                                }}
+                                                className="customSubMenu block px-4 py-2 text-white hover:bg-red-400"
+                                            >
+                                                {option.label}
+                                            </Link>
+                                        ))}
                                     </div>
                                 )}
                             </div>
-
-                            {/* <Link
-                                onClick={() => setIsOpen(false)}
-                                className="customSubMenu"
-                            >
-                                Buscar Recibo...
-                            </Link> */}
                         </>
                     ) : (
                         <p className="block px-4 py-2 text-sm text-gray-400">

@@ -52,11 +52,6 @@ export function InvoiceSearchFormPage() {
             setLoading(true);
             setError('');
 
-            // const response = await getImageRefuelingByDNIAndInvoiceRequest(
-            //     cedula,
-            //     invoice,
-            // );
-
             let response;
             const handler = invoiceTypeHandlers[invoiceType];
 
