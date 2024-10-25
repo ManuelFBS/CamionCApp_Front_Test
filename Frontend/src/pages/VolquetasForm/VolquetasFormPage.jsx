@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-undef */
 /* eslint-disable no-empty */
 /* eslint-disable no-unused-vars */
@@ -22,9 +23,10 @@ export function VolquetasFormPage() {
         reset,
     } = useForm();
     const { dni, vehicleRegistrationPlate } = useAuth();
-    const navigate = useNavigate();
+    const [dniRefresh, setDNIRefresh] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [formNumber, setFormNumber] = useState('Cargando...');
+    const navigate = useNavigate();
 
     const fetchFormNumber = async () => {
         try {
@@ -40,6 +42,7 @@ export function VolquetasFormPage() {
 
     useEffect(() => {
         fetchFormNumber();
+        setDNIRefresh(dni);
     }, []);
 
     const onSubmit = async (data) => {
@@ -105,8 +108,11 @@ export function VolquetasFormPage() {
             <div className="flex h-[calc(100vh-100px)] items-center justify-center -mt-4">
                 <div className="bg-zinc-100 border-2 border-gray-600 max-w-3xl w-full p-0 rounded-md">
                     <div className="bg-gray-300 border-2 border-transparent border-b-gray-500 flex justify-items-center">
-                        <h2 className="text-2xl font-bold italic pt-1 ml-72 mb-2 text-gray-600">
-                            Nueva Planilla
+                        <h2 className="text-2xl font-bold italic pt-1 ml-56 mb-2 text-gray-600">
+                            <span className="text-slate-500">
+                                Nueva Planilla:
+                            </span>{' '}
+                            <span className="text-slate-900">Volquetas</span>
                         </h2>
                     </div>
 
@@ -141,7 +147,7 @@ export function VolquetasFormPage() {
                             <div>
                                 <Label htmlFor="cedula">Cédula Conductor</Label>
                                 <p className="border border-gray-300 bg-gray-200 rounded-md p-1.5 mt-1 text-blue-700 text-right">
-                                    {dni || 'Cargando...'}
+                                    {dni || dniRefresh}
                                 </p>
                             </div>
                         </div>
