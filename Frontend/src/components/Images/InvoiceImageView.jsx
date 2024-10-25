@@ -47,7 +47,7 @@ export function InvoiceImageView() {
             <button
                 className={
                     invoiceType === 'heavyload'
-                        ? 'absolute -bottom-20 -ml-24 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+                        ? 'absolute -bottom-80 -ml-24 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
                         : invoiceType === 'volqueta'
                           ? 'absolute -bottom-40 -ml-24 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
                           : 'absolute bottom-20 -ml-24 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
