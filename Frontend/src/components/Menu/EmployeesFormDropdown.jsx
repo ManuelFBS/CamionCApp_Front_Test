@@ -33,18 +33,26 @@ export const EmployeeFormDropdown = () => {
     return (
         <div className="relative" ref={menuRef}>
             <button onClick={toggleMenu} className="pt-1 hover:text-yellow-200">
-                Empleado
+                Empleado (Planillas)
             </button>
             {isOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
                     {isAuthenticated ? (
                         <>
                             <Link
+                                to={'heavyload/planilla/add'}
+                                onClick={() => setIsOpen(false)}
+                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                            >
+                                ...Carga Pesada
+                            </Link>
+
+                            <Link
                                 to={'volquetas/planilla/add'}
                                 onClick={() => setIsOpen(false)}
                                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                             >
-                                Nueva planilla Volquetas
+                                ...Volquetas
                             </Link>
 
                             <Link
@@ -52,7 +60,7 @@ export const EmployeeFormDropdown = () => {
                                 onClick={() => setIsOpen(false)}
                                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                             >
-                                Nueva planilla Tanqueo
+                                ...Tanqueo
                             </Link>
                         </>
                     ) : (

@@ -1,12 +1,12 @@
 export { HomePage } from './Home/HomePage';
-// Iniciar Sesión...
+// Iniciar Sesión... -----------------------------------------------------------------------------------------------------
 export { LoginPage } from './Login/LoginPage';
 // Empleados...
 export { EmployeesPage } from './Employees/EmployeesPage';
 export { EmployeesFormAddPage } from './Employees/EmployeesFormAddPage';
 export { EmployeeByDniPage } from './Employees/EmployeesByDniPage';
 export { UpdateEmployeeByDni } from './Employees/UpdateEmployeeFormByDniPage';
-// Usuarios...
+// Usuarios... -----------------------------------------------------------------------------------------------------------
 export { UsersFormAddPage } from './Users/UsersFormAddPage';
 export {
     UsersFormDisablePage,
@@ -14,20 +14,22 @@ export {
 } from './Users/UsersFormDisableUnlockPage';
 export { UsersPage } from './Users/UsersPage';
 export { UsersSearchPage } from './Users/UsersSearchPage';
-// Volquetas...
+// Carga Pesada... ------------------------------------------------------------------------------------------------------
+export { HeavyLoadForm } from './HeavyLoad/HeavyLoadFormPage';
+// Volquetas... -----------------------------------------------------------------------------------------------------------
 export { GeneralAccessPage } from './GeneralAccess/GeneralAccessPage';
 export { VolquetasFormPage } from './VolquetasForm/VolquetasFormPage';
-// Tanqueos...
+// Tanqueos... -----------------------------------------------------------------------------------------------------------
 export { RefuelingFormPage } from './Refueling/RefuelingFormPage';
-// Licencias...
+// Licencias... ------------------------------------------------------------------------------------------------------------
 export { DriverLicenseFormAddPage } from './Licenses/DriverLicenseFormAddPage';
-// Vehículos...
+// Vehículos... -----------------------------------------------------------------------------------------------------------
 export { VehiclesPage } from './Vehicles/VehiclesPage';
 export { VehicleFormAddPage } from './Vehicles/VehicleFormAddPage';
 export { AssignDriverToVehicleFormPage } from './Vehicles/AssignDriverToVehicleForm';
-// Documentos...
+// Documentos... -------------------------------------------------------------------------------------------------------
 export { VehicleDocumentRegisterPage } from './Documents/VehicleDocumentRegPage';
 // Recibos...
 export { InvoiceSearchFormPage } from './Invoices/InvoiceSearchFormPage';
-
+// --------------------------------------------------------------------------------------------------------------------------
 export { UnauthorizedPage } from './UnauthorizedPage/UnauthorizedPage';

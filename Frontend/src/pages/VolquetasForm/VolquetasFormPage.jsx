@@ -13,7 +13,6 @@ import { useEffect, useState } from 'react';
 import { Loading } from '../../components/Loading/Loading';
 import swal2 from 'sweetalert2';
 import { useAuth } from '../../context/AuthContext';
-// import { generateFormControlNumber } from '../../libs/generateNumber';
 
 export function VolquetasFormPage() {
     const {
@@ -78,7 +77,6 @@ export function VolquetasFormPage() {
                 setFormNumber('Cargando...');
 
                 // Regenerar un nuevo número de planilla después de registrar...
-                // setFormNumber(generateFormControlNumber());
                 fetchFormNumber();
                 setIsLoading(false);
             }
@@ -120,7 +118,7 @@ export function VolquetasFormPage() {
                         onSubmit={handleSubmit(onSubmit)}
                         className="pt-5 pl-6 pr-6 pb-4"
                     >
-                        {/* Nro de planilla --- Cédula --- Fecha */}
+                        {/* Nro de planilla --- Fecha --- Cédula */}
                         <div className="grid grid-cols-3 gap-3">
                             <div>
                                 <Label htmlFor="n_planilla">Nº Planilla</Label>

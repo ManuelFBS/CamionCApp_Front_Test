@@ -14,6 +14,7 @@ import {
     UsersPage,
     UsersSearchPage,
     GeneralAccessPage,
+    HeavyLoadForm,
     VolquetasFormPage,
     RefuelingFormPage,
     UnauthorizedPage,
@@ -206,6 +207,17 @@ function App() {
                         <Route
                             path="/general_access"
                             element={<GeneralAccessPage />}
+                        />
+                        <Route
+                            path="/heavyload/planilla/add"
+                            element={
+                                <ProtectedRoute
+                                    allowed={['Admin', 'Owner', 'Empleado']}
+                                >
+                                    {/* <VolquetasFormPage /> */}
+                                    <HeavyLoadForm />
+                                </ProtectedRoute>
+                            }
                         />
                         <Route
                             path="/volquetas/planilla/add"
