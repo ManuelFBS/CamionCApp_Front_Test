@@ -41,6 +41,17 @@ function App() {
                         <Route path="/" element={<HomePage />} />
                         <Route path="/login" element={<LoginPage />} />
                         <Route
+                            path="/heavyload/planilla/add"
+                            element={
+                                // <ProtectedRoute
+                                //     allowed={['Admin', 'Owner', 'Empleado']}
+                                // >
+                                //     <HeavyLoadForm />
+                                // </ProtectedRoute>
+                                <HeavyLoadForm />
+                            }
+                        />
+                        <Route
                             path="/employees"
                             element={
                                 <ProtectedRoute allowed={['Admin', 'Owner']}>
@@ -208,17 +219,17 @@ function App() {
                             path="/general_access"
                             element={<GeneralAccessPage />}
                         />
-                        <Route
+                        {/* <Route
                             path="/heavyload/planilla/add"
                             element={
-                                <ProtectedRoute
-                                    allowed={['Admin', 'Owner', 'Empleado']}
-                                >
-                                    {/* <VolquetasFormPage /> */}
-                                    <HeavyLoadForm />
-                                </ProtectedRoute>
+                                // <ProtectedRoute
+                                //     allowed={['Admin', 'Owner', 'Empleado']}
+                                // >
+                                //     <HeavyLoadForm />
+                                // </ProtectedRoute>
+                                <HeavyLoadForm />
                             }
-                        />
+                        /> */}
                         <Route
                             path="/volquetas/planilla/add"
                             element={

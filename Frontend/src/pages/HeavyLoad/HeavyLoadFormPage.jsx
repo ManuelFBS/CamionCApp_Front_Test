@@ -2,6 +2,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-empty */
 /* eslint-disable no-unused-vars */
+import axios from 'axios';
 import { Button, Input, Label } from '../../components/UI';
 import { useForm } from 'react-hook-form';
 import {
@@ -9,7 +10,7 @@ import {
     genHLContRandNumberRequest,
 } from '../../../api/heavyLoad';
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Loading } from '../../components/Loading/Loading';
 import swal2 from 'sweetalert2';
 import { useAuth } from '../../context/AuthContext';
@@ -45,7 +46,7 @@ export function HeavyLoadForm() {
         fetchFormNumber();
         setDNIRefresh(dni);
         setRegistrationPlateRefresh(vehicleRegistrationPlate);
-    }, []);
+    }, [dni, vehicleRegistrationPlate]);
 
     const onSubmit = async (data) => {
         try {
@@ -54,15 +55,26 @@ export function HeavyLoadForm() {
             const _data = {
                 ...data,
                 n_planilla: formNumber,
-                cedula: dni,
+                conductor_cedula: dni,
                 placa_vehiculo: vehicleRegistrationPlate,
             };
 
-            if (_data.observacion === undefined) {
-                _data.observacion = 'S/O';
-            }
+            _data.valor_flete = parseInt(_data.valor_flete, 10);
+            _data.anticipo_empresa = parseInt(_data.anticipo_empresa, 10);
+            _data.anticipo_cliente = parseInt(_data.anticipo_cliente, 10);
+            _data.peaje = parseInt(_data.peaje, 10);
+            _data.mantenimiento = parseInt(_data.mantenimiento, 10);
+            _data.mecanico = parseInt(_data.mecanico, 10);
+            _data.acpm = parseInt(_data.acpm, 10);
+            _data.otros = parseInt(_data.otros, 10) || 0;
 
-            const response = await createNewHeavyLoadFormRequest(_data);
+            console.log('Datos a almacenar:', _data);
+
+            // const response = await createNewHeavyLoadFormRequest(_data);
+            const response = await axios.post(
+                'http://localhost:7000/api/heavyload/hld-form',
+                _data,
+            );
 
             if (response.status === 201) {
                 swal2.fire({
@@ -81,6 +93,8 @@ export function HeavyLoadForm() {
                 setIsLoading(false);
             }
         } catch (error) {
+            console.error(error.message);
+            console.error(error.stack);
             swal2.fire({
                 title: 'Error inesperado...!',
                 text: `Ha ocurrido un error inesperado: ${error.message}. Si el error persiste, contacte con el Desarrollador del software...!!!`,

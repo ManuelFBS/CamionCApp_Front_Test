@@ -15,7 +15,7 @@ export {
 export { UsersPage } from './Users/UsersPage';
 export { UsersSearchPage } from './Users/UsersSearchPage';
 // Carga Pesada... ------------------------------------------------------------------------------------------------------
-export { HeavyLoadForm } from './HeavyLoad/HeavyLoadFormPage';
+export { HeavyLoadForm } from './HeavyLoad/HeavyLoadFormPage.jsx';
 // Volquetas... -----------------------------------------------------------------------------------------------------------
 export { GeneralAccessPage } from './GeneralAccess/GeneralAccessPage';
 export { VolquetasFormPage } from './VolquetasForm/VolquetasFormPage';

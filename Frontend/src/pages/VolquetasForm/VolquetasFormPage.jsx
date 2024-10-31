@@ -23,6 +23,8 @@ export function VolquetasFormPage() {
     } = useForm();
     const { dni, vehicleRegistrationPlate } = useAuth();
     const [dniRefresh, setDNIRefresh] = useState('');
+    const [registrationPlateRefresh, setRegistrationPlateRefresh] =
+        useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [formNumber, setFormNumber] = useState('Cargando...');
     const navigate = useNavigate();
@@ -42,6 +44,7 @@ export function VolquetasFormPage() {
     useEffect(() => {
         fetchFormNumber();
         setDNIRefresh(dni);
+        setRegistrationPlateRefresh(vehicleRegistrationPlate);
     }, []);
 
     const onSubmit = async (data) => {
@@ -155,7 +158,8 @@ export function VolquetasFormPage() {
                             <div>
                                 <Label htmlFor="placa_vehiculo">Placa</Label>
                                 <p className="border border-gray-300 bg-gray-200 rounded-md p-1.5 mt-1.5 mb-3 text-blue-700 text-right">
-                                    {vehicleRegistrationPlate || 'Cargando...'}
+                                    {vehicleRegistrationPlate ||
+                                        registrationPlateRefresh}
                                 </p>
                             </div>
 

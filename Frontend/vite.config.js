@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
@@ -30,16 +32,21 @@ export default defineConfig({
 
 // import { defineConfig } from 'vite';
 // import react from '@vitejs/plugin-react';
-// import { config } from 'dotenv';
+// import dotenv from 'dotenv';
 
-// config();
+// dotenv.config();
 
 // // https://vitejs.dev/config/
 // export default defineConfig({
-//   plugins: [react()],
-//   server: {
-//     proxy: {
-//       '/api': process.env.VITE_BACK_URL_LOC,
+//     plugins: [react()],
+//     server: {
+//         proxy: {
+//             '/api': {
+//                 // target: process.env.VITE_BACK_URL_LOC,
+//                 target: 'http://localhost:7000',
+//                 changeOrigin: true,
+//                 rewrite: (path) => path.replace(/^\/api/, ''),
+//             },
+//         },
 //     },
-//   },
 // });
