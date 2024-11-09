@@ -2,13 +2,14 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-empty */
 /* eslint-disable no-unused-vars */
-import axios from 'axios';
+
 import { Button, Input, Label } from '../../components/UI';
 import { useForm } from 'react-hook-form';
+import { createNewHeavyLoadFormRequest } from '../../../api/heavyLoad';
 import {
-    createNewHeavyLoadFormRequest,
-    genHLContRandNumberRequest,
-} from '../../../api/heavyLoad';
+    cancelFormNumbRequest,
+    getFormNumberRequest,
+} from '../../../api/generatorFormNumber';
 import { useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { Loading } from '../../components/Loading/Loading';
@@ -27,26 +28,41 @@ export function HeavyLoadForm() {
     const [registrationPlateRefresh, setRegistrationPlateRefresh] =
         useState('');
     const [isLoading, setIsLoading] = useState(false);
-    const [formNumber, setFormNumber] = useState('Cargando...');
+    const [formNumber, setFormNumber] = useState('');
     const navigate = useNavigate();
 
-    const fetchFormNumber = async () => {
-        try {
-            const { data } = await genHLContRandNumberRequest();
-            const { numbOfForm } = data;
-
-            setFormNumber(numbOfForm);
-        } catch (error) {
-            console.error('Error al generar el número de planilla:', error);
-            setFormNumber('Error al generar número');
-        }
-    };
-
+    // Llamada inicial para obtener el número de
+    // planilla al montar el componente...
     useEffect(() => {
+        const fetchFormNumber = async () => {
+            try {
+                const response = await getFormNumberRequest();
+
+                setFormNumber(response.data.serial);
+            } catch (error) {
+                console.error('Error al obtener el número de planilla:', error);
+            }
+        };
         fetchFormNumber();
+
         setDNIRefresh(dni);
         setRegistrationPlateRefresh(vehicleRegistrationPlate);
+
+        // Se limpia el número de planilla en caso de desmontaje sin envío...
+        return () => {
+            handleCancelFormNumber();
+        };
     }, [dni, vehicleRegistrationPlate]);
+
+    // Se cancela el número de planilla cuando sea necesario...
+    const handleCancelFormNumber = async () => {
+        try {
+            await cancelFormNumbRequest({ serial: formNumber });
+            setFormNumber('');
+        } catch (error) {
+            console.error('Error al cancelar el número de planilla:', error);
+        }
+    };
 
     const onSubmit = async (data) => {
         try {
@@ -57,24 +73,19 @@ export function HeavyLoadForm() {
                 n_planilla: formNumber,
                 conductor_cedula: dni,
                 placa_vehiculo: vehicleRegistrationPlate,
+                valor_flete: parseInt(data.valor_flete, 10) || 0,
+                anticipo_empresa: parseInt(data.anticipo_empresa, 10) || 0,
+                anticipo_cliente: parseInt(data.anticipo_cliente, 10) || 0,
+                peaje: parseInt(data.peaje, 10) || 0,
+                mantenimiento: parseInt(data.mantenimiento, 10) || 0,
+                mecanico: parseInt(data.mecanico, 10) || 0,
+                acpm: parseInt(data.acpm, 10) || 0,
+                otros: parseInt(data.otros, 10) || 0,
             };
-
-            _data.valor_flete = parseInt(_data.valor_flete, 10);
-            _data.anticipo_empresa = parseInt(_data.anticipo_empresa, 10);
-            _data.anticipo_cliente = parseInt(_data.anticipo_cliente, 10);
-            _data.peaje = parseInt(_data.peaje, 10);
-            _data.mantenimiento = parseInt(_data.mantenimiento, 10);
-            _data.mecanico = parseInt(_data.mecanico, 10);
-            _data.acpm = parseInt(_data.acpm, 10);
-            _data.otros = parseInt(_data.otros, 10) || 0;
 
             console.log('Datos a almacenar:', _data);
 
-            // const response = await createNewHeavyLoadFormRequest(_data);
-            const response = await axios.post(
-                'http://localhost:7000/api/heavyload/hld-form',
-                _data,
-            );
+            const response = await createNewHeavyLoadFormRequest(_data);
 
             if (response.status === 201) {
                 swal2.fire({
@@ -85,16 +96,12 @@ export function HeavyLoadForm() {
                 });
 
                 reset();
-
-                setFormNumber('Cargando...');
-
-                // Regenerar un nuevo número de planilla después de registrar...
-                fetchFormNumber();
+                setFormNumber('');
                 setIsLoading(false);
             }
         } catch (error) {
-            console.error(error.message);
-            console.error(error.stack);
+            console.error('Error al registrar:', error);
+            console.error(error.stack); ////// /////
             swal2.fire({
                 title: 'Error inesperado...!',
                 text: `Ha ocurrido un error inesperado: ${error.message}. Si el error persiste, contacte con el Desarrollador del software...!!!`,
@@ -104,10 +111,12 @@ export function HeavyLoadForm() {
         }
     };
 
-    const onCancel = () => {
+    const onCancel = async () => {
+        await handleCancelFormNumber(); // Asegura la cancelación antes de navegar...
         reset();
         navigate('/general_access');
     };
+
     return (
         <div className="bg-otherpages min-h-screen">
             {isLoading && (
